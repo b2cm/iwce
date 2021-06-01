@@ -54,6 +54,53 @@
         <section class="informative"><h2>Decentralized Identifier</h2></section>
         Decentralized Identifier as per [[did-core]]
         <section class="informative"><h2>Verifiable Credentials and Selective Disclosure</h2></section>
+        This protocol supports verifiable credentials and verifiable presentations according to [[vc-data-model]]. Additionally
+        it supports a special way implementing the selective disclosure-feature. This feature gives the credential-holder the
+        oppurtunity, to choose which attributes to show to the verifier. To achive this every attribute-value a credential contains is hashed with a salt.
+        The final verifiable credential will only contain the hashes; the salts and values are stored in a separate json-object, called plaintext-credential.
+        The following example will show such a plaintext-credential and its corresponding verifiable credential.
+        <aside class="example">
+          <p> Plaintext credential </p>
+          <pre class="json" >
+{
+   "id":"did:ethr:0x1611994c317bed3102D65A93B667Dbe0591Da41c",
+   "hashAlg":"keccak-256",
+   "name": {
+   "value":"Max",
+   "salt":"dc0931a0-60c6-4bc8-a27d-b3fd13e62c63",
+   "hash":"0xd8925653ed000200d2b491bcabe2ea69f378abb91f056993a6d3e3b28ad4ccc4"
+  },
+  "age": {
+   "value":20,
+   "salt":"3e9bacd3-aa74-42c1-9895-e490e3931a73",
+  "hash":"0x43bde6fcd11015c6a996206dadd25e149d131c69a7249280bae723c6bad53888"
+  }
+}
+          </pre>
+          <p> Corresponding verifiable credential</p>
+          <pre class="json">
+
+  {
+    "@context":["https://www.w3.org/2018/credentials/v1",
+        "https://identity.hs-mittweida.de/credentials/ld-context/"],
+    "type":["VerifiableCredential"],
+    "credentialSubject": {
+        "id":"did:ethr:0x1611994c317bed3102D65A93B667Dbe0591Da41c",
+        "type":"NameAgeCredential",
+        "name":"0xd8925653ed000200d2b491bcabe2ea69f378abb91f056993a6d3e3b28ad4ccc4",
+        "age":"0x43bde6fcd11015c6a996206dadd25e149d131c69a7249280bae723c6bad53888"
+    },
+    "issuer":"did:ethr:0x6d32738382c6389eF0D79045a76411C42Fff3a5e",
+    "issuanceDate":"2020-11-30T11:06:39.423520Z",
+    "proof": {
+        "type":"EcdsaSecp256k1RecoverySignature2020",
+        "proofPurpose":"assertionMethod",
+        "verificationMethod":"did:ethr:0x6d32738382c6389eF0D79045a76411C42Fff3a5e",
+        "created":"2020-11-30T11:06:39.497073Z",
+        "jws":"ey..E="
+    }
+  }  </pre>
+        </aside>
         <section class="informative"><h2>Universal-/App-Links</h2></section>
     </section>
 
