@@ -11,9 +11,19 @@
     <script class="remove">
       // All config options at https://respec.org/docs/
       var respecConfig = {
-        editors: [{ name: "Your Name", url: "https://your-site.com" }],
-        github: "some-org/mySpec",
-        shortName: "dahut",
+        editors: [
+            {
+              name: "Christoph Menzer",
+              url: "blockchain.hs-mittweida.de",
+              company: "Hochschule Mittweida",
+            }, {
+              name: "Sarah Otto",
+              url: "blockchain.hs-mittweida.de",
+              company: "Hochschule Mittweida",
+            },
+        ],
+        github: "some-org/iwce",
+        shortName: "iwce",
         xref: "web-platform",
         group: "my-working-group",
         noRecTrack: true,
@@ -22,45 +32,59 @@
   </head>
   <body>
     <section id="abstract">
-      <p>This is required.</p>
+      <p>Inter Wallet Credential Exchange describes a simple way to exchange identity information in a secure, decentralized and scalable manner. It uses some standardized data structures, formats and transport protocols to enable applications (particulary identity wallets) from different  manufacturers to communicate with each other, without a third party or an intermediary. The main purpose of this approach is to establish a claim-based identity management model in the world wide web.</p>
     </section>
     <section id="sotd">
       <p>This is required.</p>
     </section>
     <section class="informative">
       <h2>Introduction</h2>
-      <p>Some informative introductory text.</p>
-      <aside class="note" title="A useful note">
-        <p>I'm a note!</p>
+
+      <p>The Verifiable Credentials Data Model [[vc-data-model]] is used to express simple statements about an entity, like drivers licences, university degrees or government-issued passports etc. The ecosystem of this model consists of multiple roles and their actors, which can be identified by some sorts of identifiers. This can be Decentralized Identifiers (DIDs) [[did-core]], Uniform Resource Identifiers (URIs) [[rfc3986]], Uniform Resource Locators (URLs) and so on. By the use of DIDs and their corresponding DID-Documents, they are fully under control by the owner of this DID. Therefore, they have neither trust nor make any statement about the owner itself.</p>
+
+      <aside class="note" title="DID-Documents">
+        <p>It is important to understand, that DID-Documents DO NOT contain any personally identifiable information (PII). They are used to describe some technical information about the identifier only. For example, this can be public keys, methods for verification, authentication and assertion, or service endpoints.</p>
       </aside>
+
+      <p>To address this, Verifiable Credentials (VCs) and their corresponding Verifiable Presentations (VPs) can be used. VCs are cryptographically signed by a (allegedly) trusted issuer, that makes claims about a subject. This subject is represented by an identifier, for example, a DID. VPs are cryptographically signed by the user to prove that he has the DID specified as subject under control.</p>
+
+      <p>The Inter Wallet Credential Exchange uses DIDs, VCs and VPs in conjunction with HTTPS to transport identity information between two applications. For best decentralization, the use of special URLs, known as Universal-Links [[]] or App-Links [[]], is recommended. In the case of web applications running on a desktop, these links can be transferred using a QR code.</p>
     </section>
 
     <section>
       <h2>Scope</h2>
-      <aside class="example">
-        <p>This is an example.</p>
-        <pre class="js">
-        // Automatic syntax highlighting
-        function someJavaScript(){}
-        </pre>
-      </aside>
+
+      <p>This proposal mainly specifies two data structures and their encoding and transport over HTTPS. It describes the use of Universal- or App-Links and their advantages in terms of decentralization. Furthermore, VCs and an additional special data structure are used so that it is possible for users to disclose only certain personal information, without the complexity of Zero Knowledge Proofs.</p>
+
+      <p>Out of scope are any semantics of concrete VCs and related data structures. Moreover, no detailed implementation instructions are given with regard to different development environments, programming languages or operating systems.</p>
     </section>
 
     <section class="informative"><h2>Terms and Definitions</h2></section>
 
     <section class="informative"><h2>Abbreviations and Symbols</h2></section>
 
-    <section class="informative"><h2>Assumption</h2>
+    <section class="informative"><h2>Assumptions</h2>
+
         <section class="informative"><h2>Decentralized Identifier</h2></section>
+
         Decentralized Identifier as per [[did-core]]
+
         <section class="informative"><h2>Verifiable Credentials and Selective Disclosure</h2></section>
-        <section class="informative"><h2>Universal-/App-Links</h2></section>
+
+        <section class="informative"><h2>Universal- /App-Links</h2></section>
     </section>
 
-      <section><h2>Protocol Flow</h2>
-          <section><h2>Credential Request</h2></section>
-          <section><h2>Credential Response</h2></section>
-      </section>
+    <section><h2>Protocol Flow</h2>
+      <section><h2>Credential Requests</h2></section>
+          <aside class="example">
+            <p>This is an example.</p>
+            <pre class="js">
+            // Automatic syntax highlighting
+            function someJavaScript(){}
+            </pre>
+          </aside>
+      <section><h2>Credential Responses</h2></section>
+    </section>
 
     <section class="informative">
       <h2>User Experience</h2>
@@ -68,6 +92,10 @@
 
     <section class="informative">
       <h2>Security Considerations</h2>
+    </section>
+
+    <section class="informative">
+      <h2>Future Prospects</h2>
     </section>
 
     <section id="conformance">
