@@ -32,7 +32,11 @@
   </head>
   <body>
     <section id="abstract">
-      <p>Inter Wallet Credential Exchange describes a simple way to exchange identity information in a secure, decentralized and scalable manner. It uses some standardized data structures, formats and transport protocols to enable applications (particulary identity wallets) from different  manufacturers to communicate with each other, without a third party or an intermediary. The main purpose of this approach is to establish a claim-based identity management model in the world wide web.</p>
+      <p>
+      Inter Wallet Credential Exchange describes a simple way to exchange identity information in a secure, decentralized and scalable manner.
+      It uses some standardized data structures, formats and transport protocols to enable applications (particulary identity wallets) from different  manufacturers to communicate with each other, without a third party or an intermediary.
+      The main purpose of this approach is to establish a claim-based identity management model in the world wide web.
+      </p>
     </section>
     <section id="sotd">
       <p>This is required.</p>
@@ -40,44 +44,74 @@
     <section class="informative">
       <h2>Introduction</h2>
 
-      <p>The Verifiable Credentials Data Model [[vc-data-model]] is used to express simple statements about an entity, like drivers licences, university degrees or government-issued passports etc. The ecosystem of this model consists of multiple roles and their actors, which can be identified by some sorts of identifiers. This can be Decentralized Identifiers (DIDs) [[did-core]], Uniform Resource Identifiers (URIs) [[rfc3986]], Uniform Resource Locators (URLs) and so on. By the use of DIDs and their corresponding DID-Documents, they are fully under control by the owner of this DID. Therefore, they have neither trust nor make any statement about the owner itself.</p>
+      <p>
+      The Verifiable Credentials Data Model [[vc-data-model]] is used to express simple statements about an entity, like drivers licences, university degrees or government-issued passports etc.
+      The ecosystem of this model consists of multiple roles and their actors, which can be identified by some sorts of identifiers.
+      This can be Decentralized Identifiers (DIDs) [[did-core]], Uniform Resource Identifiers (URIs) [[rfc3986]], Uniform Resource Locators (URLs) and so on.
+      By the use of DIDs and their corresponding DID-Documents, they are fully under control by the owner of this DID.
+      Therefore, they have neither trust nor make any statement about the owner itself.
+      </p>
 
       <aside class="note" title="DID-Documents">
-        <p>It is important to understand, that DID-Documents DO NOT contain any personally identifiable information (PII). They are used to describe some technical information about the identifier only. For example, this can be public keys, methods for verification, authentication and assertion, or service endpoints.</p>
+        <p>
+        It is important to understand, that DID-Documents DOES NOT contain any Personally Identifiable Information (PII).
+        They are used to describe some technical information about the identifier only.
+        For example, this can be public keys, methods for verification, authentication and assertion, or service endpoints.
+        </p>
       </aside>
 
-      <p>To address this, Verifiable Credentials (VCs) and their corresponding Verifiable Presentations (VPs) can be used. VCs are cryptographically signed by a (allegedly) trusted issuer, that makes claims about a subject. This subject is represented by an identifier, for example, a DID. VPs are cryptographically signed by the user to prove that he has the DID specified as subject under control.</p>
+      <p>
+      To address this, Verifiable Credentials (VCs) and their corresponding Verifiable Presentations (VPs) can be used.
+      VCs are cryptographically signed by a (allegedly) trusted issuer, that makes claims about a subject.
+      This subject is represented by an identifier, for example, a DID.
+      VPs are cryptographically signed by the user to prove that he has the DID specified as subject under control.
+      </p>
 
-      <p>The Inter Wallet Credential Exchange uses DIDs, VCs and VPs in conjunction with HTTPS to transport identity information between two applications. For best decentralization, the use of special URLs, known as Universal-Links [[]] or App-Links [[]], is recommended. In the case of web applications running on a desktop, these links can be transferred using a QR code.</p>
+      <p>
+      The Inter Wallet Credential Exchange uses DIDs, VCs and VPs in conjunction with HTTPS to transport identity information between two applications directly.
+      For best decentralization, the use of special URLs is recommended, known as Universal-Links [[]] or App-Links [[]] respectively.
+      In the case of web applications running on a desktop, these links can be transferred using a QR code.
+      </p>
     </section>
 
     <section>
       <h2>Scope</h2>
 
-      <p>This proposal mainly specifies two data structures and their encoding and transport over HTTPS. It describes the use of Universal- or App-Links and their advantages in terms of decentralization. Furthermore, VCs and an additional special data structure are used so that it is possible for users to disclose only certain personal information, without the complexity of Zero Knowledge Proofs.</p>
+      <p>
+      This proposal mainly specifies two data structures and their encoding and transport over HTTPS.
+      It describes the use of Universal- or App-Links and their advantages in terms of decentralization.
+      Furthermore, VCs and an additional special data structure are used so that it is possible for users to disclose only certain personal information, without the complexity of Zero Knowledge Proofs.
+      </p>
 
-      <p>Out of scope are any semantics of concrete VCs and related data structures. Moreover, no detailed implementation instructions are given with regard to different development environments, programming languages or operating systems.</p>
+      <p>
+      Out of scope are any semantics of concrete VCs and related data structures.
+      Moreover, no detailed implementation instructions are given with regard to different development environments, programming languages or operating systems.
+      </p>
     </section>
 
     <section class="informative"><h2>Terms and Definitions</h2></section>
 
     <section class="informative"><h2>Abbreviations and Symbols</h2></section>
 
-    <section class="informative"><h2>Assumptions</h2>
+    <section><h2>Assumptions</h2>
 
         <section class="informative"><h2>Decentralized Identifier</h2></section>
 
-        Decentralized Identifier as per [[did-core]]
+        Decentralized Identifier as defined in [[did-core]] are a new type of identifier.
 
         <section class="informative"><h2>Verifiable Credentials and Selective Disclosure</h2></section>
 
-        This protocol supports verifiable credentials and verifiable presentations according to [[vc-data-model]]. Additionally
-        it supports a special way implementing the selective disclosure-feature. This feature gives the credential-holder the
-        oppurtunity, to choose which attributes to show to the verifier. To achive this every attribute-value a credential contains is hashed with a salt.
-        The final verifiable credential will only contain the hashes; the salts and values are stored in a separate json-object, called plaintext-credential.
-        The following example will show such a plaintext-credential and its corresponding verifiable credential.
+        <p>
+        This proposal make use of VCs and VPs according to [[vc-data-model]].
+        Additionally it supports a special way implementing the selective disclosure feature.
+        This feature gives the credential holder the oppurtunity to choose, which attributes will shown to the verifier.
+        To achive this, every attribute value, a credential contains, is hashed with a salt.
+        The final verifiable credential will only contain this hashes - the salts and the values are stored in a separate json data object, called the Plaintext Credential.
+        The following example will show such a Plaintext Credential and its corresponding VC.
+        </p>
+
         <aside class="example">
-          <p> Plaintext credential </p>
+          <p>Plaintext Credential</p>
           <pre class="json">
           {
             "id":"did:ethr:0x1611994c317bed3102D65A93B667Dbe0591Da41c",
@@ -94,11 +128,13 @@
             },
           }
           </pre>
-          <p> Corresponding verifiable credential</p>
+        </aside>
+        <aside class="example">
+          <p>Corresponding Verifiable Credential</p>
           <pre class="json">
           {
             "@context":["https://www.w3.org/2018/credentials/v1",
-                "https://identity.hs-mittweida.de/credentials/ld-context/"],
+                "https://some.example.com/credentials/ld-context/"],
             "type":["VerifiableCredential"],
             "credentialSubject": {
                 "id":"did:ethr:0x1611994c317bed3102D65A93B667Dbe0591Da41c",
@@ -116,9 +152,11 @@
                 "jws":"ey..E="
             }
           }
-    </pre>
+          </pre>
         </aside>
-        <section class="informative"><h2>Universal-/App-Links</h2></section>
+
+      <section class="informative"><h2>Universal-/App-Links</h2></section>
+
     </section>
 
     <section><h2>Protocol Flow</h2>
