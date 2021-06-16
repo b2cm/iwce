@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>Inter Wallet Credential Exchange</title>
+    <title>Inter-Wallet Credential Exchange</title>
     <script
       src="https://www.w3.org/Tools/respec/respec-w3c"
       class="remove"
@@ -95,9 +95,54 @@
 
     <section><h2>Assumptions</h2>
 
-        <section class="informative"><h2>Decentralized Identifier</h2></section>
+        <section class="informative"><h2>Decentralized Identifiers</h2></section>
 
-        Decentralized Identifier as defined in [[did-core]] are a new type of identifier.
+        <p>
+        Decentralized Identifiers as defined in [[did-core]] are a new type of identifier.
+        They are generated and controlled by an entity itself.
+        The proof of control is provided by cryptographic methods, e.g. by means of digital signatures.
+        There is no limit to the number of DIDs an entity can create.
+        </p>
+
+        <p>
+        A DID contains the designation of a schema, the designation of a DID method, and the the identifier itself. The designators are separated by a colon:
+        </p>
+
+        <aside class="example">
+          <pre class="json">
+          did:example:123456789abcdefghi
+          </pre>
+        </aside>
+
+        <p>
+        The schema denotes that it is a DID. The DID method identifies the way an identifier can be created and managed.
+        The W3C maintains an official list of DID methods and their specifications for this purpose [[did-spec-registries]].
+        The specification of a DID method contains information about all important operations, such as creating, reading, updating and deleting DIDs.
+        </p>
+
+        <p>
+        A DID is resolved by a DID resolver into a DID document.
+        This contains additional information about a DID, such as further public keys, authentication and authorization methods, or so-called service endpoints.
+        The latter are details of services or storage locations that can be linked to the identifier.
+        A DID document NEVER contains personal information.
+        </p>
+
+        <p>
+        The DID method specification also contains all the information that a DID resolver needs to resolve a DID.
+        The minimum that a DID method must describe is how the identifier is generated. This is true, for example, for the special Peer DID Method (`did:peer:xyz`), which does not bind to any specific network and is developed for short-duration and bidirectional connections.
+        Most DID methods additionally specify a routing information in which network the identifier is to be found.
+        Further information, such as the DID document, can then be retrieved here by a DID resolver.
+        This can be executed locally or remotely and obtain its information from a blockchain, a Content Addressable Storage (CAS) or any other API.
+        </p>
+
+        <p>
+        In some DID methods, the identifiers have cryptographic material or a fingerprint of a public key, just as they do in a blockchain.
+        In this way, a DID can authenticate directly against a smart contract in the corresponding blockchain. Furthermore, some signature methods such as the Elliptic Curve Digital Signature Algorithm (ECDSA) allow the recovery of the public key directly from the signature.
+        This feature makes it possible to use a signed message directly for authentication between two hosts.
+        The method for generating the identifier, e.g. a DID or an address in the context of blockchain, is usually known, so it can be easily calculated from the public key.
+        From this point of view, it is not urgent to keep a DID document as long as the relationship between private key, public key and identifier is computable.
+        For example, in the ETHR DID Method (`did:ethr:xyz`), the DID document is created by the DID resolver.
+        </p>
 
         <section class="informative"><h2>Verifiable Credentials and Selective Disclosure</h2></section>
 
@@ -114,61 +159,297 @@
           <p>Plaintext Credential</p>
           <pre class="json">
           {
-            "id":"did:ethr:0x1611994c317bed3102D65A93B667Dbe0591Da41c",
-            "hashAlg":"keccak-256",
+            "id": "did:example:0x1611994c317bed3102D65A93B667Dbe0591Da41c",
+            "hashAlg": "keccak-256",
             "name": {
-                "value":"Max",
-                "salt":"dc0931a0-60c6-4bc8-a27d-b3fd13e62c63",
-                "hash":"0xd8925653ed000200d2b491bcabe2ea69f378abb91f056993a6d3e3b28ad4ccc4"
+                "value": "Max",
+                "salt": "dc0931a0-60c6-4bc8-a27d-b3fd13e62c63",
+                "hash": "0xd8925653ed000200d2b491bcabe2ea69f378abb91f056993a6d3e3b28ad4ccc4"
             },
             "age": {
-                "value":20,
-                "salt":"3e9bacd3-aa74-42c1-9895-e490e3931a73",
-                "hash":"0x43bde6fcd11015c6a996206dadd25e149d131c69a7249280bae723c6bad53888"
+                "value": 20,
+                "salt": "3e9bacd3-aa74-42c1-9895-e490e3931a73",
+                "hash": "0x43bde6fcd11015c6a996206dadd25e149d131c69a7249280bae723c6bad53888"
             },
           }
           </pre>
         </aside>
+
         <aside class="example">
           <p>Corresponding Verifiable Credential</p>
           <pre class="json">
           {
-            "@context":["https://www.w3.org/2018/credentials/v1",
+            "@context": ["https://www.w3.org/2018/credentials/v1",
                 "https://some.example.com/credentials/ld-context/"],
-            "type":["VerifiableCredential"],
+            "type": ["VerifiableCredential"],
             "credentialSubject": {
-                "id":"did:ethr:0x1611994c317bed3102D65A93B667Dbe0591Da41c",
-                "type":"NameAgeCredential",
-                "name":"0xd8925653ed000200d2b491bcabe2ea69f378abb91f056993a6d3e3b28ad4ccc4",
-                "age":"0x43bde6fcd11015c6a996206dadd25e149d131c69a7249280bae723c6bad53888"
+                "id": "did:example:0x1611994c317bed3102D65A93B667Dbe0591Da41c",
+                "type": "NameAgeCredential",
+                "name": "0xd8925653ed000200d2b491bcabe2ea69f378abb91f056993a6d3e3b28ad4ccc4",
+                "age": "0x43bde6fcd11015c6a996206dadd25e149d131c69a7249280bae723c6bad53888"
             },
-            "issuer":"did:ethr:0x6d32738382c6389eF0D79045a76411C42Fff3a5e",
-            "issuanceDate":"2020-11-30T11:06:39.423520Z",
+            "issuer": "did:example:0x6d32738382c6389eF0D79045a76411C42Fff3a5e",
+            "issuanceDate": "2020-11-30T11:06:39.423520Z",
             "proof": {
-                "type":"EcdsaSecp256k1RecoverySignature2020",
-                "proofPurpose":"assertionMethod",
-                "verificationMethod":"did:ethr:0x6d32738382c6389eF0D79045a76411C42Fff3a5e",
-                "created":"2020-11-30T11:06:39.497073Z",
-                "jws":"ey..E="
+                "type": "EcdsaSecp256k1RecoverySignature2020",
+                "proofPurpose": "assertionMethod",
+                "verificationMethod": "did:example:0x6d32738382c6389eF0D79045a76411C42Fff3a5e",
+                "created": "2020-11-30T11:06:39.497073Z",
+                "jws": "ey..E="
             }
           }
           </pre>
         </aside>
 
-      <section class="informative"><h2>Universal-/App-Links</h2></section>
+        <p>
+        VCs are data structures that make statements about a person or an object according to the principles of claim-based identity and are cryptographically verifiable.
+        The claims are simple statements associated with an identifier and some metadata and signed by an issuer.
+        Basically, anyone can act as an issuer, e.g., a trusted entity or even oneself.
+        The latter type of VCs are called self-issued credentials and are useful, for example, for delegating one's own credential to another identifier.
+        What should be considered a trusted entity for certain statements is not part of the proposal.
+        </p>
+
+        <p>
+        The W3C model envisages three main roles for the participants, any of which can be assumed by anyone: the holder, the issuer and the verifier.
+        The issuer represents the critical point.
+        Further measures are required to ensure the credibility of the issuer.
+        </p>
+
+      <section class="informative"><h2>Verifiable Credentials and Verifiable Presentations</h2></section>
+
+        <p>
+        The VCs are issued to a subject and its identifier, e.g. a DID.
+        The owner of the corresponding private key of this DID is called the holder.
+        This holder can generate a VP from one or more VCs, in which he can prove by a signature that he controls the identifier(s) of one or more VCs.
+        The aggregation of this information typically expresses some aspect of a person, organization, or other entity.
+        He finally sends the VP to a verifier that can cryptographically validate the VC's trustworthiness.
+        </p>
+
+        <aside class="example">
+          <p>Corresponding Verifiable Presentation</p>
+          <pre class="json">
+            {
+              "@context": [
+                "https://www.w3.org/2018/credentials/v1",
+              ],
+              "type": "VerifiablePresentation",
+              "verifiableCredential": [{
+                "@context": ["https://www.w3.org/2018/credentials/v1",
+                    "https://some.example.com/credentials/ld-context/"],
+                "type": ["VerifiableCredential"],
+                "credentialSubject": {
+                    "id": "did:example:0x1611994c317bed3102D65A93B667Dbe0591Da41c",
+                    "type": "NameAgeCredential",
+                    "name": "0xd8925653ed000200d2b491bcabe2ea69f378abb91f056993a6d3e3b28ad4ccc4",
+                    "age": "0x43bde6fcd11015c6a996206dadd25e149d131c69a7249280bae723c6bad53888"
+                },
+                "issuer": "did:example:0x6d32738382c6389eF0D79045a76411C42Fff3a5e",
+                "issuanceDate": "2020-11-30T11:06:39.423520Z",
+                "proof": {
+                    "type": "EcdsaSecp256k1RecoverySignature2020",
+                    "proofPurpose": "assertionMethod",
+                    "verificationMethod": "did:example:0x6d32738382c6389eF0D79045a76411C42Fff3a5e",
+                    "created": "2020-11-30T11:06:39.497073Z",
+                    "jws": "ey..E="
+                }
+              }],
+              "proof": [{
+                  "type": "EcdsaSecp256k1RecoverySignature2020",
+                  "proofPurpose": "authentication",
+                  "verificationMethod": "did:example:0x1611994c317bed3102D65A93B667Dbe0591Da41c",
+                  "challenge": "1f44d55f-f161-4938-a659-f8026467f126",
+                  "created": "2020-11-30T11:06:39.497073Z",
+                  "jws": "lC..n="
+              }]
+            }
+          </pre>
+        </aside>
+
+        <p>
+        In addition, a VP itself can also have an identifier.
+        The array of proofs then contains two proofs about the control of DIDs: one for that of the subject of one or more VCs and one for that of the VP.
+        It is also possible for each of the VCs to be issued to a different identifier.
+        For each of these identifiers (subject), the corresponding proof can be included in the array of proofs in the VP.
+        </p>
+
+        <aside class="example">
+          <p>Verifiable Presentation including an ID and multiple VCs</p>
+          <pre class="json">
+            {
+              "@context": [
+                "https://www.w3.org/2018/credentials/v1",
+              ],
+              "id": "did:anotherexample:xyv2-xzpq-q9wa-p7t",
+              "type": "VerifiablePresentation",
+              "verifiableCredential": [{
+                "@context": ["https://www.w3.org/2018/credentials/v1",
+                    "https://some.example.com/credentials/ld-context/"],
+                "type": ["VerifiableCredential"],
+                "credentialSubject": {
+                    "id": "did:example:0x1611994c317bed3102D65A93B667Dbe0591Da41c",
+                    "type": "NameCredential",
+                    "name": "0xd8925653ed000200d2b491bcabe2ea69f378abb91f056993a6d3e3b28ad4ccc4",
+                },
+                "issuer": "did:example:0x6d32738382c6389eF0D79045a76411C42Fff3a5e",
+                "issuanceDate": "2020-11-30T11:06:39.423520Z",
+                "proof": {
+                    "type": "EcdsaSecp256k1RecoverySignature2020",
+                    "proofPurpose": "assertionMethod",
+                    "verificationMethod": "did:example:0x6d32738382c6389eF0D79045a76411C42Fff3a5e",
+                    "created": "2020-11-30T11:06:39.497073Z",
+                    "jws": "ey..E="
+                }
+              }, {
+                "@context": ["https://www.w3.org/2018/credentials/v1",
+                    "https://some.example.com/credentials/ld-context/"],
+                "type": ["VerifiableCredential"],
+                "credentialSubject": {
+                    "id": "did:example:0x7c0296fb88ec930a2a31361ca1b579603bc18892",
+                    "type": "AgeCredential",
+                    "age": "0x43bde6fcd11015c6a996206dadd25e149d131c69a7249280bae723c6bad53888"
+                },
+                "issuer": "did:example:0x6d32738382c6389eF0D79045a76411C42Fff3a5e",
+                "issuanceDate": "2020-11-30T11:06:39.423520Z",
+                "proof": {
+                    "type": "EcdsaSecp256k1RecoverySignature2020",
+                    "proofPurpose": "assertionMethod",
+                    "verificationMethod": "did:example:0x6d32738382c6389eF0D79045a76411C42Fff3a5e",
+                    "created": "2020-11-30T11:06:39.497073Z",
+                    "jws": "da..G"
+                }
+              }],
+              "proof": [{
+                  "type": "EcdsaSecp256k1RecoverySignature2020",
+                  "proofPurpose": "authentication",
+                  "verificationMethod": "did:example:0x1611994c317bed3102D65A93B667Dbe0591Da41c",
+                  "challenge": "1f44d55f-f161-4938-a659-f8026467f126",
+                  "created": "2020-11-30T11:06:39.497073Z",
+                  "jws": "Lm..v="
+                }, {
+                  "type": "EcdsaSecp256k1RecoverySignature2020",
+                  "proofPurpose": "authentication",
+                  "verificationMethod": "did:example:0x7c0296fb88ec930a2a31361ca1b579603bc18892",
+                  "challenge": "1f44d55f-f161-4938-a659-f8026467f126",
+                  "created": "2020-11-30T11:06:39.497073Z",
+                  "jws": "xS..6"
+                }, {
+                  "type": "EcdsaSecp256k1RecoverySignature2020",
+                  "proofPurpose": "authentication",
+                  "verificationMethod": "did:anotherexample:xyv2-xzpq-q9wa-p7t",
+                  "challenge": "1f44d55f-f161-4938-a659-f8026467f126",
+                  "created": "2020-11-30T11:06:39.497073Z",
+                  "jws": "ui..r"
+                }]
+            }
+          </pre>
+        </aside>
+
+      <section><h2>Strict domain separation</h2></section>
+
+        <p>
+        The use of multiple proofs in a VP makes it possible to strictly separate the domains of identity information.
+        For best decentralization, VCs SHOULD only be issued within a domain and SHOULD only be stored in a domains own application.
+        To be faithful to the concept of Inter-Wallet Credential Exchange, the only way to exchange VCs with external or third-party applications MUST be the use of VPs.
+        The private key of a subject's identifier MUST not leave its own applications within a domain.
+        This has several advantages:
+        </p>
+
+        <ul>
+          <li>an issuer can decide how to store the private keys of a subject for which it issues Verifiable Credentials (security levels)</li>
+          <li>an issuer can enforce security mechanisms such as two-factor authentication</li>
+          <li>an issuer can customize the issuance process to meet its specific needs</li>
+          <li>areas of responsibility are clearly delineated</li>
+          <li>personal data is managed where it already exists, within a domain</li>
+        </ul>
+
+      <section class="informative"><h2>Universal- / App-Links</h2></section>
+
+        <p>
+        Universal or app links are a way in mobile operating systems to retrieve certain data from an app using a URL.
+        For Apple's iOS they are documented under the name Universal Links, for Google they are called Android App Links.
+        They are a form of deep links that are handled specifically in the operating systems.
+        During the installation of an app, a handler for a specific URL is created in the operating system that uniquely identifies the app.
+        To prove ownership of a URL, a check is made for a specific machine-readable document that must be provided under the URL's domain.
+        After this check is successful, requests to this URL are passed directly to the installed app without any further interaction from the user.
+        Binding to a domain ensures uniqueness and the mandatory use of HTTPS ensures authenticity.
+        </p>
+
+        <p>
+        If a request is made to the URL and there is no corresponding app installed, it will be opened in the browser as usual.
+        The request therefore does not end in an error state, but can be answered by the own web server as desired.
+        For example, the user gets a hint to install the corresponding app or is redirected to an online application.
+        The request itself can be encoded in the URL as a parameter and is then transmitted via HTTP(S): `https://some.example.com?request` (HTTP request).
+        The response to this returns, for example, the requested data or also error information (HTTP response).
+        </p>
 
     </section>
 
     <section><h2>Protocol Flow</h2>
       <section><h2>Credential Requests</h2></section>
+
+        <p>
+        To request VCs within a VP the following simple data structure MUST be used, which MUST then be encoded in Base64url [[rfc4648]].
+        </p>
+
           <aside class="example">
-            <p>This is an example.</p>
-            <pre class="js">
-            // Automatic syntax highlighting
-            function someJavaScript(){}
+            <p>Credential Request data object</p>
+            <pre class="json">
+            {
+                "type": "CredentialRequest",
+                "version": "1.0",
+                "accept": {
+                    "type": "VerifiablePresentation",
+                    "credentialTypes": ["AgeCredential","NameCredential"],
+                    "mandatoryFields": ["age"]
+                },
+                "responseUrl": "https://some.example.com/responses",
+                "challenge": "1f44d55f-f161-4938-a659-f8026467f126"
+            }
             </pre>
           </aside>
-      <section><h2>Credential Responses</h2></section>
+
+        <p>
+        This encoded JSON data object MUST be attached as a query to the URL of the application that will process the request.
+        </p>
+
+          <aside class="example">
+            <p>Encoded Credential Request</p>
+            <pre class="http">
+            https://some.example.com/requests?ey...0=
+            </pre>
+          </aside>
+
+      <section><h2>Credential Responses</h2>
+
+        <p>
+        To respond to a request for a VP the following data structure MUST be used, which MUST then be encoded in Base64url [[rfc4648]].
+        </p>
+
+          <aside class="example">
+            <p>Credential Response data object</p>
+            <pre class="json">
+            {
+                "type": "CredentialResponse",
+                "version": "1.0",
+                "selectiveDisclosure": true,
+                "verifiablePresentation": {},
+                "plaintextCredentials": [{},{}]
+            }
+            </pre>
+          </aside>
+
+        <p>
+        This encoded JSON data object MUST be attached as a query to the URL of the application that will process the response.
+        If the Selective Disclosure feature is not supported (`"selectiveDisclosure": false`), the field `plaintextCredentials` is optional.
+        </p>
+
+          <aside class="example">
+            <p>Encoded Credential Response</p>
+            <pre class="http">
+            https://some.example.com/responses?st...r
+            </pre>
+          </aside>
+      </section>
     </section>
 
     <section class="informative">
