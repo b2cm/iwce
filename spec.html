@@ -27,6 +27,18 @@
         xref: "web-platform",
         group: "my-working-group",
         noRecTrack: true,
+        localBiblio: {
+          applinks: {
+            title: "Handling Android App Links. Android Developers",
+            href: "https://developer.android.com/training/app-links",
+            publisher: "Google Inc.",
+          },
+          universallinks: {
+            title: "Allowing Apps and Websites to Link to Your Content. Apple Developer Documentation",
+            href: "https://developer.apple.com/documentation/uikit/inter-process_communication/allowing_apps_and_websites_to_link_to_your_content",
+            publisher: "Apple Inc.",
+          },
+        },
       };
     </script>
   </head>
@@ -69,7 +81,7 @@
 
       <p>
       The Inter Wallet Credential Exchange uses DIDs, VCs and VPs in conjunction with HTTPS to transport identity information between two applications directly.
-      For best decentralization, the use of special URLs is recommended, known as Universal-Links [[]] or App-Links [[]] respectively.
+      For best decentralization, the use of special URLs is recommended, known as Universal-Links [[universallinks]] or App-Links [[applinks]] respectively.
       In the case of web applications running on a desktop, these links can be transferred using a QR code.
       </p>
     </section>
@@ -95,7 +107,7 @@
 
     <section><h2>Assumptions</h2>
 
-        <section class="informative"><h2>Decentralized Identifiers</h2></section>
+        <section class="informative"><h2>Decentralized Identifiers</h2>
 
         <p>
         Decentralized Identifiers as defined in [[did-core]] are a new type of identifier.
@@ -143,8 +155,9 @@
         From this point of view, it is not urgent to keep a DID document as long as the relationship between private key, public key and identifier is computable.
         For example, in the ETHR DID Method (`did:ethr:xyz`), the DID document is created by the DID resolver.
         </p>
+        </section>
 
-        <section class="informative"><h2>Verifiable Credentials and Selective Disclosure</h2></section>
+        <section class="informative" id="selective-disclosure"><h2>Verifiable Credentials and Selective Disclosure</h2>
 
         <p>
         This proposal make use of VCs and VPs according to [[vc-data-model]].
@@ -160,6 +173,7 @@
           <pre class="json">
           {
             "id": "did:example:0x1611994c317bed3102D65A93B667Dbe0591Da41c",
+            "type": "HashedPlaintextCredential2021",
             "hashAlg": "keccak-256",
             "name": {
                 "value": "Max",
@@ -214,8 +228,9 @@
         The issuer represents the critical point.
         Further measures are required to ensure the credibility of the issuer.
         </p>
+      </section>
 
-      <section class="informative"><h2>Verifiable Credentials and Verifiable Presentations</h2></section>
+      <section class="informative"><h2>Verifiable Credentials and Verifiable Presentations</h2>
 
         <p>
         The VCs are issued to a subject and its identifier, e.g. a DID.
@@ -273,20 +288,20 @@
         </p>
 
         <aside class="example">
-          <p>Verifiable Presentation including an ID and multiple VCs</p>
-          <pre class="json">
+          <p>Verifiable Presentation containing an ID and several Verifiable Credentials, as well as their associated proofs</p>
+          <pre class="nohighlight">
             {
               "@context": [
                 "https://www.w3.org/2018/credentials/v1",
               ],
-              "id": "did:anotherexample:xyv2-xzpq-q9wa-p7t",
+              <span style="color: #008000; font-weight: bold">"id": "did:anotherexample:xyv2-xzpq-q9wa-p7t"</span>,
               "type": "VerifiablePresentation",
               "verifiableCredential": [{
                 "@context": ["https://www.w3.org/2018/credentials/v1",
                     "https://some.example.com/credentials/ld-context/"],
                 "type": ["VerifiableCredential"],
                 "credentialSubject": {
-                    "id": "did:example:0x1611994c317bed3102D65A93B667Dbe0591Da41c",
+                    <span style="color: #008000; font-weight: bold">"id": "did:example:0x1611994c317bed3102D65A93B667Dbe0591Da41c"</span>,
                     "type": "NameCredential",
                     "name": "0xd8925653ed000200d2b491bcabe2ea69f378abb91f056993a6d3e3b28ad4ccc4",
                 },
@@ -304,7 +319,7 @@
                     "https://some.example.com/credentials/ld-context/"],
                 "type": ["VerifiableCredential"],
                 "credentialSubject": {
-                    "id": "did:example:0x7c0296fb88ec930a2a31361ca1b579603bc18892",
+                    <span style="color: #008000; font-weight: bold">"id": "did:example:0x7c0296fb88ec930a2a31361ca1b579603bc18892"</span>,
                     "type": "AgeCredential",
                     "age": "0x43bde6fcd11015c6a996206dadd25e149d131c69a7249280bae723c6bad53888"
                 },
@@ -321,21 +336,21 @@
               "proof": [{
                   "type": "EcdsaSecp256k1RecoverySignature2020",
                   "proofPurpose": "authentication",
-                  "verificationMethod": "did:example:0x1611994c317bed3102D65A93B667Dbe0591Da41c",
+                  <span style="color: #008000; font-weight: bold">"verificationMethod": "did:example:0x1611994c317bed3102D65A93B667Dbe0591Da41c"</span>,
                   "challenge": "1f44d55f-f161-4938-a659-f8026467f126",
                   "created": "2020-11-30T11:06:39.497073Z",
                   "jws": "Lm..v="
                 }, {
                   "type": "EcdsaSecp256k1RecoverySignature2020",
                   "proofPurpose": "authentication",
-                  "verificationMethod": "did:example:0x7c0296fb88ec930a2a31361ca1b579603bc18892",
+                  <span style="color: #008000; font-weight: bold">"verificationMethod": "did:example:0x7c0296fb88ec930a2a31361ca1b579603bc18892"</span>,
                   "challenge": "1f44d55f-f161-4938-a659-f8026467f126",
                   "created": "2020-11-30T11:06:39.497073Z",
                   "jws": "xS..6"
                 }, {
                   "type": "EcdsaSecp256k1RecoverySignature2020",
                   "proofPurpose": "authentication",
-                  "verificationMethod": "did:anotherexample:xyv2-xzpq-q9wa-p7t",
+                  <span style="color: #008000; font-weight: bold">"verificationMethod": "did:anotherexample:xyv2-xzpq-q9wa-p7t"</span>,
                   "challenge": "1f44d55f-f161-4938-a659-f8026467f126",
                   "created": "2020-11-30T11:06:39.497073Z",
                   "jws": "ui..r"
@@ -343,8 +358,174 @@
             }
           </pre>
         </aside>
+      </section>
 
-      <section><h2>Strict domain separation</h2></section>
+      <section class="informative"><h2>Verifiable Credentials and Revocation</h2>
+
+        In addition to an expiration date (`expirationDate` or `validUntil`) for credentials, issuers also have the option to revoke it. For this purpose, the [[[vc-data-model]]] defines the property `credentialStatus`, which links to a revocation list. This list can be stored on a blockchain, a Content Addressable Storage (CAS) or any other API.
+
+        <aside class="example">
+            <p>Expiration date and status in a Verifiable Credential</p>
+            <pre class="json">
+            {
+                "expirationDate": "2020-01-01T19:23:24Z",
+                "credentialStatus": {
+                  "id": "0x06012c8cf97bead5deae237070f9587f8e7a266d",
+                  "type": "EthereumMainnetStatusList2021"
+                },
+            }
+            </pre>
+          </aside>
+      </section>
+
+      <section class="informative" id="uniapplinks"><h2>Universal- / App-Links</h2>
+
+        <p>
+        Universal or app links are a way in mobile operating systems to retrieve certain data from an app using a URL.
+        For Apple's iOS they are documented under the name Universal Links [[universallinks]], for Google they are called Android App Links [[applinks]].
+        They are a form of deep links that are handled specifically in the operating systems.
+        During the installation of an app, a handler for a specific URL is created in the operating system that uniquely identifies the app.
+        To prove ownership of a URL, a check is made for a specific machine-readable document that must be provided under the URL's domain.
+        After this check is successful, requests to this URL are passed directly to the installed app without any further interaction from the user.
+        Binding to a domain ensures uniqueness and the mandatory use of HTTPS ensures authenticity.
+        </p>
+
+        <p>
+        If a request is made to the URL and there is no corresponding app installed, it will be opened in the browser as usual.
+        The request therefore does not end in an error state, but can be answered by the own web server as desired.
+        For example, the user gets a hint to install the corresponding app or is redirected to an online application.
+        The request itself can be encoded in the URL as a parameter and is then transmitted via HTTP(S): `https://some.example.com?request` (HTTP request).
+        The response to this returns, for example, the requested data or also error information (HTTP response).
+        </p>
+      </section>
+    </section>
+
+    <section><h2>Protocol Flow</h2>
+      <section><h2>Credential Request</h2>
+
+        <p>
+        To request VCs within a VP the following simple JSON data structure MUST be used, which MUST then be encoded in Base64url [[rfc4648]]. The URIs used comply with the [[[rfc3986]]] specification. Verifiable Credentials and Verifiable Presentations are compliant to the [[[vc-data-model]]].
+        </p>
+
+        <p>
+        A Credential Request is defined with the following properties:
+        <dl>
+        <dt>type</dt><dd>The `type` property is required and MUST be an URI. The value `"CredentialRequest"` MUST be used to determine that it is a Credential Request.</dd>
+        <dt>accept</dt><dd>The `accept` property describes the accepted data of a response to a request. It is defined with the following properties:
+          <dl>
+          <dt>type</dt><dd>The `type` property is required and MUST be an URI. The value `"CredentialResponse"` MUST be used to determine that the requested data is to provided in the form of a Credential Response.</dd>
+          <dt>verifiablePresentation<dt><dd>The `verifiablePresentation` property is reqired.
+            <dl>
+            <dt>type</dt><dd>The `type` property is required and MUST be an URI. It denotes the expected type of the Verifiable Presentation.</dd>
+            <dt>credentialTypes</dt><dd>The `credentialTypes` property is required and MUST be one or more URIs. It denotes the accepted URIs of Verifiable Credentials within a Verifiable Presentation.</dd>
+           </dl></dd>
+          <dt>selectiveDisclosure</dt><dd>The `selectiveDisclosure` property is optional. If it is not set, no method for selective disclosure is accepted.
+            <dl>
+            <dt>type</dt><dd>The `type` property is required and MUST be an URI. It denotes the expected method of the selective disclosure feature.</dd>
+            <dt>requiredProperties</dt><dd>The `requiredProperties` property is is type specific. For the selective disclosure feature proposed in section [[[#selective-disclosure]]] the `requiredProperties` property MUST be an object that contains one or more sets of strings corresponding to the property names of one or more plaintext credentials that are to be mandatory disclosed. The key of each set MUST correspond to the Credential Types name as specified in property `credentialTypes`.</dd>
+           </dl></dd>
+          </dl></dd>
+        <dt>responseUrl</dt><dd>The `responseUrl` property is reqired and MUST be an URL. The location MUST be a ressource with HTTPS enabled. For best decentralization it is RECOMMENDED to use Universal- or App-Links, see section [[[#uniapplinks]]].</dd>
+        <dt>challenge</dt><dd>The `challenge` property is reqired and MUST be a long random number. It is RECOMMENDED to use at least 128 bit. For example, an UUID [[rfc4122]] might be helpful for this task.</dd>
+        <dt>domain</dt><dd>The `domain` property is optional and MUST be an URI. It is used to announce domain-specific extensions in a Credential Request.</dd>
+        </dl>
+        </p>
+
+          <aside class="example">
+            <p>Credential Request data object</p>
+            <pre class="json">
+            {
+                "type": "CredentialRequest",
+                "accept": {
+                    "type": "CredentialResponse",
+                    "verifiablePresentation": {
+                        "type": "VerifiablePresentation",
+                        "credentialTypes": ["AgeCredential","NameCredential"],
+                    },
+                    "selectiveDisclosure": {
+                        "type": "HashedPlaintextCredential2021",
+                        "requiredProperties": {
+                            "AgeCredential": ["age"]
+                        },
+                    }
+                },
+                "responseUrl": "https://verifier-app.another-example.com/responses",
+                "challenge": "1f44d55f-f161-4938-a659-f8026467f126",
+                "domain": "example.com"
+            }
+            </pre>
+          </aside>
+
+        <p>
+        This encoded JSON data object MUST be attached as a query to the URL of the application that will process the request.
+        The encoding scheme MUST be Base64url [[rfc4648]].
+        </p>
+
+          <aside class="example">
+            <p>Encoded Credential Request</p>
+            <pre class="nohighlight">
+            https://issuer-app.example.com/requests?<span style="color: #008000; font-weight: bold">eyAidHlwZSI6ICJDc...IgfQ</span>
+            </pre>
+          </aside>
+
+          <aside class="note" title="QR-Codes">
+            <p>
+            For use with web applications on a desktop, the URL including the encoded Credential Request can be displayed as a QR code.
+            Depending on the type used, there may be restrictions on the amount of data.
+            </p>
+          </aside>
+      </section>
+
+      <section><h2>Credential Response</h2>
+
+        <p>
+        To respond to a request for a VP the following data structure MUST be used, which MUST then be encoded in Base64url [[rfc4648]]. The URIs used comply with the [[[rfc3986]]] specification. Verifiable Credentials and Verifiable Presentations are compliant to the [[[vc-data-model]]].
+        </p>
+        <p>
+        <dl>
+          <dt>type</dt><dd>The `type` property is required and MUST be an URI. The value `"CredentialResponse"` MUST be used to determine that it is a Credential Response.</dd>
+          <dt>verifiablePresentation</dt><dd>The `verifiablePresentation` property is required and defined as an object that contain exactly one Verifiable Presentation. The proofs within a Verifiable Presentation contains the `challenge` that was received with a Credential Request. The proofs can also contain the `domain` property to announce domain-specific extensions. </dd>
+          <dt>selectiveDisclosure<dt><dd>The `selectiveDisclosure` property is optional. If it is not set, no method for selective disclosure is supported.
+            <dl>
+            <dt>plaintextCredential</dt><dd>The `plaintextCredential` property is type specific. The expected return value is data conforming to the type information from a credential request. For the selective disclosure feature proposed in section [[[#selective-disclosure]]] the `plaintextCredential` property is defined as a set of objects that contain one or more Plaintext Credentials (`HashedPlaintextCredential2021`).</dd>
+            </dl></dd>
+        </dl>
+        </p>
+
+          <aside class="example">
+            <p>Credential Response data object</p>
+            <pre class="json">
+            {
+                "type": "CredentialResponse",
+                "verifiablePresentation": {},
+                "selectiveDisclosure": {
+                    "plaintextCredential": [{},{}]
+                }
+            }
+            </pre>
+          </aside>
+
+        <p>
+        This encoded JSON data object MUST be attached as a query to the URL of the application that will process the response. The encoding scheme MUST be Base64url [[rfc4648]].
+        </p>
+
+          <aside class="example">
+            <p>Encoded Credential Response</p>
+            <pre class="nohighlight">
+            https://verifier-app.another-example.com/responses?<span style="color: #008000; font-weight: bold">JWZXJpZmlhYmxlUHJ...JodH</span>
+            </pre>
+          </aside>
+      </section>
+    </section>
+
+    <section class="informative">
+      <h2>User Experience</h2>
+    </section>
+
+    <section class="informative">
+      <h2>Security Considerations</h2>
+      
+      <section><h2>Strict domain separation</h2>
 
         <p>
         The use of multiple proofs in a VP makes it possible to strictly separate the domains of identity information.
@@ -360,104 +541,9 @@
           <li>an issuer can customize the issuance process to meet its specific needs</li>
           <li>areas of responsibility are clearly delineated</li>
           <li>personal data is managed where it already exists, within a domain</li>
-        </ul>
-
-      <section class="informative"><h2>Universal- / App-Links</h2></section>
-
-        <p>
-        Universal or app links are a way in mobile operating systems to retrieve certain data from an app using a URL.
-        For Apple's iOS they are documented under the name Universal Links, for Google they are called Android App Links.
-        They are a form of deep links that are handled specifically in the operating systems.
-        During the installation of an app, a handler for a specific URL is created in the operating system that uniquely identifies the app.
-        To prove ownership of a URL, a check is made for a specific machine-readable document that must be provided under the URL's domain.
-        After this check is successful, requests to this URL are passed directly to the installed app without any further interaction from the user.
-        Binding to a domain ensures uniqueness and the mandatory use of HTTPS ensures authenticity.
-        </p>
-
-        <p>
-        If a request is made to the URL and there is no corresponding app installed, it will be opened in the browser as usual.
-        The request therefore does not end in an error state, but can be answered by the own web server as desired.
-        For example, the user gets a hint to install the corresponding app or is redirected to an online application.
-        The request itself can be encoded in the URL as a parameter and is then transmitted via HTTP(S): `https://some.example.com?request` (HTTP request).
-        The response to this returns, for example, the requested data or also error information (HTTP response).
-        </p>
-
-    </section>
-
-    <section><h2>Protocol Flow</h2>
-      <section><h2>Credential Requests</h2></section>
-
-        <p>
-        To request VCs within a VP the following simple data structure MUST be used, which MUST then be encoded in Base64url [[rfc4648]].
-        </p>
-
-          <aside class="example">
-            <p>Credential Request data object</p>
-            <pre class="json">
-            {
-                "type": "CredentialRequest",
-                "version": "1.0",
-                "accept": {
-                    "type": "VerifiablePresentation",
-                    "credentialTypes": ["AgeCredential","NameCredential"],
-                    "mandatoryFields": ["age"]
-                },
-                "responseUrl": "https://some.example.com/responses",
-                "challenge": "1f44d55f-f161-4938-a659-f8026467f126"
-            }
-            </pre>
-          </aside>
-
-        <p>
-        This encoded JSON data object MUST be attached as a query to the URL of the application that will process the request.
-        </p>
-
-          <aside class="example">
-            <p>Encoded Credential Request</p>
-            <pre class="http">
-            https://some.example.com/requests?ey...0=
-            </pre>
-          </aside>
-
-      <section><h2>Credential Responses</h2>
-
-        <p>
-        To respond to a request for a VP the following data structure MUST be used, which MUST then be encoded in Base64url [[rfc4648]].
-        </p>
-
-          <aside class="example">
-            <p>Credential Response data object</p>
-            <pre class="json">
-            {
-                "type": "CredentialResponse",
-                "version": "1.0",
-                "selectiveDisclosure": true,
-                "verifiablePresentation": {},
-                "plaintextCredentials": [{},{}]
-            }
-            </pre>
-          </aside>
-
-        <p>
-        This encoded JSON data object MUST be attached as a query to the URL of the application that will process the response.
-        If the Selective Disclosure feature is not supported (`"selectiveDisclosure": false`), the field `plaintextCredentials` is optional.
-        </p>
-
-          <aside class="example">
-            <p>Encoded Credential Response</p>
-            <pre class="http">
-            https://some.example.com/responses?st...r
-            </pre>
-          </aside>
+        </ul>      
       </section>
-    </section>
 
-    <section class="informative">
-      <h2>User Experience</h2>
-    </section>
-
-    <section class="informative">
-      <h2>Security Considerations</h2>
     </section>
 
     <section class="informative">
