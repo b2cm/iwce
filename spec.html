@@ -38,6 +38,11 @@
             href: "https://developer.apple.com/documentation/uikit/inter-process_communication/allowing_apps_and_websites_to_link_to_your_content",
             publisher: "Apple Inc.",
           },
+          didconfiguration: {
+            title: "Well Known DID Configuration",
+            href: "https://identity.foundation/specs/did-configuration/",
+            publisher: "Decentralized Identity Foundation",
+          },
         },
       };
     </script>
@@ -285,6 +290,7 @@
         The array of proofs then contains two proofs about the control of DIDs: one for that of the subject of one or more VCs and one for that of the VP.
         It is also possible for each of the VCs to be issued to a different identifier.
         For each of these identifiers (subject), the corresponding proof can be included in the array of proofs in the VP.
+        A challenge within one or more proofs authenticates a session.
         </p>
 
         <aside class="example">
@@ -426,7 +432,7 @@
            </dl></dd>
           </dl></dd>
         <dt>responseUrl</dt><dd>The `responseUrl` property is reqired and MUST be an URL. The location MUST be a ressource with HTTPS enabled. For best decentralization it is RECOMMENDED to use Universal- or App-Links, see section [[[#uniapplinks]]].</dd>
-        <dt>challenge</dt><dd>The `challenge` property is reqired and MUST be a long random number. It is RECOMMENDED to use at least 128 bit. For example, an UUID [[rfc4122]] might be helpful for this task.</dd>
+        <dt>challenge</dt><dd>The `challenge` property is reqired and MUST be a long random number. It is RECOMMENDED to use at least 128 bit. For example, an UUID [[rfc4122]] might be helpful for this task. The challenge is computed by the verifier and MUST have a Time to Live (TTL).</dd>
         <dt>domain</dt><dd>The `domain` property is optional and MUST be an URI. It is used to announce domain-specific extensions in a Credential Request.</dd>
         </dl>
         </p>
@@ -470,8 +476,9 @@
 
           <aside class="note" title="QR-Codes">
             <p>
-            For use with web applications on a desktop, the URL including the encoded Credential Request can be displayed as a QR code.
-            Depending on the type used, there may be restrictions on the amount of data.
+            For use with web applications on a desktop, the URL including the encoded Credential Request can be represented as a QR code.
+            Depending on the type used, there may be restrictions on the amount of data that can be encoded.
+            Since the challenge has a TTL, the QR code has to be rerendered frequently.
             </p>
           </aside>
       </section>
@@ -484,7 +491,7 @@
         <p>
         <dl>
           <dt>type</dt><dd>The `type` property is required and MUST be an URI. The value `"CredentialResponse"` MUST be used to determine that it is a Credential Response.</dd>
-          <dt>verifiablePresentation</dt><dd>The `verifiablePresentation` property is required and defined as an object that contain exactly one Verifiable Presentation. The proofs within a Verifiable Presentation contains the `challenge` that was received with a Credential Request. The proofs can also contain the `domain` property to announce domain-specific extensions. </dd>
+          <dt>verifiablePresentation</dt><dd>The `verifiablePresentation` property is required and defined as an object that contain exactly one Verifiable Presentation. The proofs within a Verifiable Presentation MUST contain the `challenge` property that was received with a Credential Request. The proofs can also contain the `domain` property to announce domain-specific extensions. </dd>
           <dt>selectiveDisclosure<dt><dd>The `selectiveDisclosure` property is optional. If it is not set, no method for selective disclosure is supported.
             <dl>
             <dt>plaintextCredential</dt><dd>The `plaintextCredential` property is type specific. The expected return value is data conforming to the type information from a credential request. For the selective disclosure feature proposed in section [[[#selective-disclosure]]] the `plaintextCredential` property is defined as a set of objects that contain one or more Plaintext Credentials (`HashedPlaintextCredential2021`).</dd>
@@ -518,37 +525,14 @@
       </section>
     </section>
 
-    <section class="informative">
-      <h2>User Experience</h2>
-      <p>
-        Considerations about end-user experience are closely related to the use of app/universal links and VCs/VPs.
-          App/Universal links enable a seemless user experience during exchange of VPs between Apps on the user's device, because, when implemented correctly, they identify the app the operating system should open.
-          Additionally, these links are normal URLs and can be represented in any form a URL can take, e.g. as QR-Code.
-          Therefore, an exchange between different devices (smartphone and desktop) is possible without loss in user-experience, because the QR-code can be scanned with every app capable of doing so and the user is redirected to the requested app.
-       </p>
-       <p>
-         With VCs/VPs it is possible to exchange personal Information in a verifiable and data-conserving manner.
-         In most use-cases they simplify the disclosure of these information during for example a registration process.
-         Using VCs/VPs the user must not input the information by hand but only has to send a VP.
-         The service requesting the information could rely on them, because they are signed by an issuer (Only if the service trusts the issuer).
-       </p>
-       <p>
-         Additionally, this proposal enables every service-provider that has an own app including credential and their exchange functionality in its own app without relying on a central so called identity wallet to store the issued credential.
-         From the user perspective he/she only has to rely on the issuer and its application, not in an intermediary wallet service/app for storing the credentials.
-       </p>
-    </section>
-
-    <section class="informative">
-      <h2>Security Considerations</h2>
-      
-      <section><h2>Strict domain separation</h2>
+    <section><h2>Strict domain separation</h2>
 
         <p>
-        The use of multiple proofs in a VP makes it possible to strictly separate the domains of identity information.
-        For best decentralization, VCs SHOULD only be issued within a domain and SHOULD only be stored in a domains own application.
-        To be faithful to the concept of Inter-Wallet Credential Exchange, the only way to exchange VCs with external or third-party applications MUST be the use of VPs.
-        The private key of a subject's identifier MUST not leave its own applications within a domain.
-        This has several advantages:
+          The use of multiple proofs in a VP makes it possible to strictly separate the domains of identity information.
+          For best decentralization, VCs SHOULD only be issued within a domain and SHOULD only be stored in a domains own application.
+          To be faithful to the concept of Inter-Wallet Credential Exchange, the only way to exchange VCs with external or third-party applications MUST be the use of VPs.
+          The private key of a subject's identifier MUST NOT leave its own applications within a domain.
+          This has several advantages:
         </p>
 
         <ul>
@@ -557,7 +541,86 @@
           <li>an issuer can customize the issuance process to meet its specific needs</li>
           <li>areas of responsibility are clearly delineated</li>
           <li>personal data is managed where it already exists, within a domain</li>
-        </ul>      
+          <li>an issuer can decide which properties a user really will disclose and share across the own domain (security levels)</li>
+        </ul>
+
+        <p>
+          Since the proofs in a VC can be made with different identifiers, an issuers application is able to interoperate with different types of identifiers.
+          For example, the identfier of a VP can be an address in Blockchain A and the identfiers of the VCs are DIDs anchored in Blockchain B.
+          The latter is a blockchain in the issuer's domain, blockchain A is that of a third party application.
+          In that way a user can prove control over an address in any blockchain or any other identfier in combination with verifiable personal information.
+          For this to work, both issuer and verifier MUST implement all methods of the identifiers used.
+        </p>
+
+        <p>
+          The issuing process is domain specific and an issuer decides what types of identifiers he is using for its own Verifiable Credentials.
+          An issuer SHOULD use DIDs as specified in [[[did-core]]] to authenticate a VC on a device (`id` of `credentialSubject`) to the own backend.
+          An issuer MAY use DIDs for the `issuer` property to authenticate itself to the verifier.
+          In that case the [[[didconfiguration]]] SHOULD be used for trust, see [[[#trust]]] for more details.
+        </p>
+
+    </section>
+
+    <section class="informative">
+      <h2>User Experience</h2>
+      <p>
+        Considerations about end-user experience are closely related to the use of app/universal links and VCs/VPs.
+        App/Universal links enable a seemless user experience during exchange of VPs between Apps on the user's device, because, when implemented correctly, they identify the app the operating system should open.
+        Additionally, these links are normal URLs and can be represented in any form a URL can take, e.g. as QR-Code.
+        Therefore, an exchange between different devices (smartphone and desktop) is possible without loss in user-experience, because the QR-code can be scanned with every app capable of doing so and the user is redirected to the requested app.
+       </p>
+       <p>
+        With VCs/VPs it is possible to exchange personal Information in a verifiable and data-conserving manner.
+        In most use-cases they simplify the disclosure of these information during for example a registration process.
+        Using VCs/VPs the user must not input the information by hand but only has to send a VP.
+        The service requesting the information could rely on them, because they are signed by an issuer (Only if the service trusts the issuer).
+       </p>
+       <p>
+        Additionally, this proposal enables every service-provider that has an own app including credential and their exchange functionality in its own app without relying on a central so called identity wallet to store the issued credential.
+        From the user perspective he/she only has to rely on the issuer and its application, not in an intermediary wallet service/app for storing the credentials.
+       </p>
+    </section>
+
+    <section class="informative">
+      <h2>Security Considerations</h2>
+
+      <section><h2>Perfect Forward Secrecy</h2>
+
+        <p>
+        Because of HTTPS is used to transport Credential Requests and Credential Responses between two applications, Perfect Forward Secrecy (PFS) is substantial in most of the abailable implementations.
+        Please note, that this applies only to the network connection while requests or responses are made.
+        The including VP and its VCs signed by the holder and one or more issuers are unaffected.
+        When using QR codes for a request, this security requirement is obsolete.
+        </p>
+        <p>
+        Since TLS operates in the network layer, it ensures that the information transferred within a URL is also protected (e.g. a query).
+        </p>
+
+      </section>
+
+      <section id="trust"><h2>Trust</h2>
+
+        <p>
+        Because of HTTPS is used to transport Credential Requests and Credential Responses between two applications, the underlying PKI system of TLS (X.509) builds trust for this connection, in that way, that the communication endpoints are the intended ones.
+        This is helpful to identify the applications that want to do a credential exchange.
+        </p>
+        <p>
+        Since DIDs are out of trust HTTPS can be used to map a DID to a domain.
+        This is most useful for issuers, since larger institutions usually use TLS certificates these days anyway.
+        The [[[didconfiguration]]] specification describes an approach which makes use of Well-Known URIs [[rfc8615]].
+        </p>
+
+      </section>
+
+    </section>
+
+    <section class="informative">
+      <h2>Privacy Considerations</h2>
+
+      <section><h2>Anti-correlation</h2>
+
+
+
       </section>
 
     </section>
