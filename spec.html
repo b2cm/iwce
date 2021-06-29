@@ -87,7 +87,7 @@
       <p>
       The Inter Wallet Credential Exchange uses DIDs, VCs and VPs in conjunction with HTTPS to transport identity information between two applications directly.
       For best decentralization, the use of special URLs is recommended, known as Universal-Links [[universallinks]] or App-Links [[applinks]] respectively.
-      In the case of web applications running on a desktop, these links can be transferred using a QR code.
+      In the case of web applications running on a desktop, in conjunction with a mobile device, these links can be transferred using a QR code.
       </p>
     </section>
 
@@ -103,6 +103,18 @@
       <p>
       Out of scope are any semantics of concrete VCs and related data structures.
       Moreover, no detailed implementation instructions are given with regard to different development environments, programming languages or operating systems.
+      Another limitation of this specification is the process of issuing the Verifiable Credentials used herein.
+      This is done by each service for its own and can be designed individually by the services acting as issuers.
+      It is assumed that corresponding Verifiable Credentials have already been issued to a user in an issuer's application.
+      </p>
+
+      <p>
+      It is explicitly mentioned that Inter-Wallet Credential Exchange is not a solution for single sign-on (SSO).
+      It is not about the login process as known today by means of username and password.
+      Rather, the aim is to speed up the registration process for new services and to replace the login with passwordless procedures.
+      The latter takes place exclusively within a service's own domain (see [[[#sds]]] and [[[#anti-correlation]]]).
+      However, the authentication of devices or applications against their own back end is not the actual concern either. The DIDs described here or other asymmetric cryptography are suitable for this (e.g. Web Authentication).
+      For existing systems, it is also conceivable that other authentication methods that are currently in widespread use, such as the legacy username and password, or centralized schemes such as OAuth or OpenID, could be used to authenticate within one's domain.
       </p>
     </section>
 
@@ -156,7 +168,7 @@
         In some DID methods, the identifiers have cryptographic material or a fingerprint of a public key, just as they do in a blockchain.
         In this way, a DID can authenticate directly against a smart contract in the corresponding blockchain. Furthermore, some signature methods such as the Elliptic Curve Digital Signature Algorithm (ECDSA) allow the recovery of the public key directly from the signature.
         This feature makes it possible to use a signed message directly for authentication between two hosts.
-        The method for generating the identifier, e.g. a DID or an address in the context of blockchain, is usually known, so it can be easily calculated from the public key.
+        The method for generating the identifier, e.g. a DID or an address in the context of blockchain, is usually known, so it can be easily computed from the public key.
         From this point of view, it is not urgent to keep a DID document as long as the relationship between private key, public key and identifier is computable.
         For example, in the ETHR DID Method (`did:ethr:xyz`), the DID document is created by the DID resolver.
         </p>
@@ -525,7 +537,7 @@
       </section>
     </section>
 
-    <section><h2>Strict domain separation</h2>
+    <section id="sds"><h2>Strict domain separation</h2>
 
         <p>
           The use of multiple proofs in a VP makes it possible to strictly separate the domains of identity information.
@@ -554,7 +566,7 @@
 
         <p>
           The issuing process is domain specific and an issuer decides what types of identifiers he is using for its own Verifiable Credentials.
-          An issuer SHOULD use DIDs as specified in [[[did-core]]] to authenticate a VC on a device (`id` of `credentialSubject`) to the own backend.
+          An issuer SHOULD use DIDs as specified in [[[did-core]]] to authenticate a VC on a device (`id` of `credentialSubject`) to the own back end.
           An issuer MAY use DIDs for the `issuer` property to authenticate itself to the verifier.
           In that case the [[[didconfiguration]]] SHOULD be used for trust, see [[[#trust]]] for more details.
         </p>
@@ -617,9 +629,26 @@
     <section class="informative">
       <h2>Privacy Considerations</h2>
 
-      <section><h2>Anti-correlation</h2>
+      <section id="anti-correlation"><h2>Anti-correlation</h2>
 
-
+      <p>
+        An important goal in dealing with digital identities is to avoid or at least make it more difficult to conduct in-depth analyses of user behavior.
+        The concept of SSO in particular does exactly the opposite, even across multiple services and for each individual login process.
+        In the approach of the Inter-Wallet Credential Exchange, this is complicated by two conceptual measures.
+        First, technical authentication via DIDs or other types of identfiers takes place only within the domain of a single service and is strictly separated from the exchange of a user's identity information across domain boundaries (see section [[[#sds]]]).
+        Second, even the identifiers, e.g., in the form of a DID, are not limited to a single, unique one per user when used in VCs.
+      </p>
+      <p>
+        Individual aspects of a digital identity are only stored within the app of a service that acts as issuer for it.
+        Other services that trust the aforementioned service as issuer and are interested in these individual aspects of that identity can submit a request to the app of this issuer to return a VP.
+        Further aspects of a digital identity can in turn be requested from apps of other services or issuers in the same way.
+        Each app acts as a wallet software and stores private keys that never leave it and are used to authenticate with its own back-end (e.g., DID Auth).
+        Services acting as issuers also store the VCs they issue themselves only in their own apps on the end devices of the users (and possibly as a backup in their own back end).
+        Only this app is ultimately able to sign a requested VP because only it has the corresponding private keys.
+        The user's own digital identity is thus formed from a large number of apps from different manufacturers, which exchange VPs with each other.
+        As a result, the stakeholders' areas of responsibility are clearly delineated, the correlation of personal data by intermediaries is made difficult or almost impossible, and decentralization is achieved to a high degree by the direct exchange of identity information between two apps.
+        The private keys stored in the respective apps also relieve the user of the need to enter passwords.
+      </p>
 
       </section>
 
