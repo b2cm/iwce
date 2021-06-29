@@ -440,7 +440,7 @@
           <dt>selectiveDisclosure</dt><dd>The `selectiveDisclosure` property is optional. If it is not set, no method for selective disclosure is accepted.
             <dl>
             <dt>type</dt><dd>The `type` property is required and MUST be an URI. It denotes the expected method of the selective disclosure feature.</dd>
-            <dt>requiredProperties</dt><dd>The `requiredProperties` property is is type specific. For the selective disclosure feature proposed in section [[[#selective-disclosure]]] the `requiredProperties` property MUST be an object that contains one or more sets of strings corresponding to the property names of one or more plaintext credentials that are to be mandatory disclosed. The key of each set MUST correspond to the Credential Types name as specified in property `credentialTypes`.</dd>
+            <dt>requiredProperties</dt><dd>The `requiredProperties` property is is type specific. For the selective disclosure feature proposed in section [[[#selective-disclosure]]] the `requiredProperties` property MUST be an object that contains one or more sets of strings corresponding to the property names of one or more plaintext credentials that are to be mandatory disclosed. The key of each set MUST correspond to the Credential Types name as specified in property `credentialTypes`. Which properties are then really returned is not guaranteed and has to be checked in the response.</dd>
            </dl></dd>
           </dl></dd>
         <dt>responseUrl</dt><dd>The `responseUrl` property is reqired and MUST be an URL. The location MUST be a ressource with HTTPS enabled. For best decentralization it is RECOMMENDED to use Universal- or App-Links, see section [[[#uniapplinks]]].</dd>
