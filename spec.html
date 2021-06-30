@@ -522,13 +522,25 @@
                     </dd>
                   </dl>
                 </dd>
-              </dl>
-            </dd>
 
-          <dt>responseUrl</dt>
-            <dd>
-              The `responseUrl` property is reqired and MUST be an URL.
-              The location MUST be a ressource with HTTPS enabled. For best decentralization it is RECOMMENDED to use Universal- or App-Links, see section [[[#uniapplinks]]].
+              <dt>endpoint</dt>
+                <dd>
+                  The `endpoint` property is required. It describes the endpoint to which the requested data has to be send.
+                  <dl>
+                    <dt>type</dt>
+                      <dd>
+                        The `type` property is required and MUST be an URI.
+                        The value `"AppLink"` SHOULD be used to determine that the endpoint is a Universal- or App-Link.
+                        For best decentralization it is RECOMMENDED to use Universal- or App-Links, see section [[[#uniapplinks]]].
+                        The value `"WebAddress"` MAY be used to determine that the endpoint is a normal web ressource (web address).
+                      </dd>
+                    <dt>location</dt>
+                      <dd>
+                        The `location` property is reqired and MUST be an URL that links to a ressource with HTTPS enabled.
+                      </dd>
+                  </dl>
+                </dd>
+              </dl>
             </dd>
 
           <dt>challenge</dt>
@@ -562,9 +574,12 @@
                         "requiredProperties": {
                             "AgeCredential": ["age"]
                         },
+                    },
+                    "endpoint": {
+                        "type": "AppLink",
+                        "url": "https://verifier-app.another-example.com/responses"
                     }
                 },
-                "responseUrl": "https://verifier-app.another-example.com/responses",
                 "challenge": "1f44d55f-f161-4938-a659-f8026467f126",
                 "domain": "example.com"
             }
