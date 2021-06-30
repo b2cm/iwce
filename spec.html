@@ -800,7 +800,30 @@
     </section>
 
     <section class="informative">
-      <h2>Future Prospects</h2>
+
+      <h2>Bootstrapping</h2>
+
+      <p>
+        For an app that is launched for the first time and wants to communicate with its back end, the omission of passwords requires that at least one other app is installed on the user's device that provides a VC accepted by the first app.
+        By sending a DID, the back-end system merely learns about a new device, but does not yet have any verifiable information about the user and his identity.
+        If no app from another trusted issuer can be relied upon, a newly computed DID must be associated with a digital identity in some other way.
+        In the worst case, the user must visit an issuer in person and identify himself to him (ID card, driver's license, etc.) and transmit the corresponding DID (e.g., by QR code).
+        It is also conceivable that some issuers will additionally offer other procedures for establishing identity.
+        For example, the combination with an online ID function of the ID card could be a suitable starting point for some issuers.
+        In addition, government agencies could also act as issuers and offer VCs in their apps after authentication with the ID card has been successful.
+        RFID cards, PINs/TANs/links via mail or e-mail, second devices, and many more are also ways to support bootstrapping during the initial launch of an application on a new end device which will support VCs/VPs.
+        The greater the variety of applications that support VCs and VPs, the easier and more convenient it will be for the user.
+      </p>
+
+      <p>
+        Furthermore, Transport Layer Security (TLS) and PKIs according to X.509 play an important role as a complement to DIDs.
+        They support bootstrapping in terms of trustworthiness and for channel security between a wallet and a service.
+        HTTPS in particular is widely used today.
+        It ensures the authenticity of (mostly) domain names and provides encrypted transport of data.
+        The trust hierarchies in today's PKIs are largely established, and TLS is easy to use as transport security in today's network infrastructures (NAT, firewalls, etc.).
+        With more widespread use of DIDs and VCs and the associated trust structures, these can also be used later for server-side authentication, but initially they will only replace the little-used TLS client certificates in a more flexible way.
+      </p>
+
     </section>
 
     <section id="conformance">
