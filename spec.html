@@ -52,7 +52,7 @@
     <section id="abstract">
 
       <p>
-        Inter Wallet Credential Exchange describes a simple way to exchange identity information in a secure, decentralized and scalable manner.
+        Inter-Wallet Credential Exchange describes a simple way to exchange identity information in a secure, decentralized and scalable manner.
         It uses some standardized data structures, formats and transport protocols to enable applications (particulary identity wallets) from different  manufacturers to communicate with each other, without a third party or an intermediary.
         The main purpose of this approach is to establish a claim-based identity management model in the world wide web.
       </p>
@@ -471,7 +471,9 @@
           <dl>
 
           <dt>type</dt>
-            <dd>The `type` property is required and MUST be an URI. The value `"CredentialRequest"` MUST be used to determine that it is a Credential Request.</dd>
+            <dd>
+              The `type` property is required and MUST be an URI. The value `"CredentialRequest"` MUST be used to determine that it is a Credential Request.
+            </dd>
 
           <dt>accept</dt>
             <dd>
@@ -481,7 +483,8 @@
               <dt>type</dt>
               <dd>
                 The `type` property is required and MUST be an URI.
-                The value `"CredentialResponse"` MUST be used to determine that the requested data is to provided in the form of a Credential Response.</dd>
+                The value `"CredentialResponse"` MUST be used to determine that the requested data is to provided in the form of a Credential Response.
+              </dd>
 
               <dt>verifiablePresentation<dt>
                 <dd>
@@ -788,7 +791,7 @@
           Services acting as issuers also store the VCs they issue themselves only in their own apps on the end devices of the users (and possibly as a backup in their own back end).
           Only this app is ultimately able to sign a requested VP because only it has the corresponding private keys.
           The user's own digital identity is thus formed from a large number of apps from different manufacturers or services, which exchange VPs with each other.
-          As a result, the stakeholders' areas of responsibility are clearly delineated, the correlation of personal data by intermediaries is made difficult or almost impossible, and decentralization is achieved to a high degree by the direct exchange of identity information between two apps.
+          As a result the correlation of personal data by intermediaries is made more difficult and decentralization is achieved to a high degree by the direct exchange of identity information between two apps directly.
           The private keys stored in the respective apps also relieve the user of the need to enter passwords.
         </p>
 
