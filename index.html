@@ -624,12 +624,20 @@
                 The `selectiveDisclosure` property is optional.
                 If it is not set, no method for selective disclosure is supported.
                 <dl>
+
+                  <dt>type</dt>
+                    <dd>
+                      The `type` property is required and MUST be an URI.
+                      It denotes the expected method of the selective disclosure feature.
+                    </dd>
+
                   <dt>plaintextCredential</dt>
                     <dd>
                       The `plaintextCredential` property is type specific.
                       The expected return value is data conforming to the type information from a credential request.
-                      For the selective disclosure feature proposed in section [[[#selective-disclosure]]] the `plaintextCredential` property is defined as a set of objects that contain one or more Plaintext Credentials (`HashedPlaintextCredential2021`).
+                      For the selective disclosure feature proposed in section [[[#selective-disclosure]]] the `plaintextCredential` property is defined as a set of objects that contain one or more Plaintext Credentials.
                     </dd>
+
                 </dl>
               </dd>
           </dl>
@@ -642,6 +650,7 @@
                   "type": "CredentialResponse",
                   "verifiablePresentation": {},
                   "selectiveDisclosure": {
+                      "type": "HashedPlaintextCredential2021",
                       "plaintextCredential": [{},{}]
                   }
               }
