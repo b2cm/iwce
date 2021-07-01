@@ -476,7 +476,7 @@
 
           <dt>accept</dt>
             <dd>
-              The `accept` property is reqired and describes the accepted data of a response to a request. It is defined with the following properties:
+              The `accept` property is required and describes the accepted data of a response to a request. It is defined with the following properties:
             <dl>
 
               <dt>type</dt>
@@ -524,18 +524,30 @@
                     </dd>
                   </dl>
                 </dd>
-              </dl>
-            </dd>
 
-          <dt>responseUrl</dt>
-            <dd>
-              The `responseUrl` property is reqired and MUST be an URL.
-              The location MUST be a ressource with HTTPS enabled. For best decentralization it is RECOMMENDED to use Universal- or App-Links, see section [[[#uniapplinks]]].
+              <dt>endpoint</dt>
+                <dd>
+                  The `endpoint` property is required. It describes the endpoint to which the requested data has to be send.
+                  <dl>
+                    <dt>type</dt>
+                      <dd>
+                        The `type` property is required and MUST be an URI.
+                        It can take either the value `"AppLink"` or `"WebAddress"`.
+                        `"AppLink"` determines that the endpoint is a Universal- or App-Link and is RECOMMENDED for best decentralization, see section [[[#uniapplinks]]].
+                        The value `"WebAddress"` determines that the endpoint is a normal web resource (web address).
+                      </dd>
+                    <dt>location</dt>
+                      <dd>
+                        The `location` property is required and MUST be an URL that links to a resource with HTTPS enabled.
+                      </dd>
+                  </dl>
+                </dd>
+              </dl>
             </dd>
 
           <dt>challenge</dt>
             <dd>
-              The `challenge` property is reqired and MUST be a long random number.
+              The `challenge` property is required and MUST be a long random number.
               It is RECOMMENDED to use at least 128 bit. For example, an UUID [[rfc4122]] might be helpful for this task.
               The challenge is computed by the verifier and MUST have a Time to Live (TTL).
             </dd>
@@ -564,9 +576,12 @@
                         "requiredProperties": {
                             "AgeCredential": ["age"]
                         },
+                    },
+                    "endpoint": {
+                        "type": "AppLink",
+                        "location": "https://verifier-app.another-example.com/responses"
                     }
                 },
-                "responseUrl": "https://verifier-app.another-example.com/responses",
                 "challenge": "1f44d55f-f161-4938-a659-f8026467f126",
                 "domain": "example.com"
             }
