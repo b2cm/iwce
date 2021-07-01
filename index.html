@@ -14,18 +14,17 @@
         editors: [
             {
               name: "Christoph Menzer",
-              url: "blockchain.hs-mittweida.de",
-              company: "Hochschule Mittweida",
+              company: "BCCM at Hochschule Mittweida",
+              companyURL: "https://blockchain.hs-mittweida.de",
             }, {
               name: "Sarah Otto",
-              url: "blockchain.hs-mittweida.de",
-              company: "Hochschule Mittweida",
+              company: "BCCM at Hochschule Mittweida",
+              companyURL: "https://blockchain.hs-mittweida.de",
             },
         ],
-        github: "some-org/iwce",
+        github: "b2cm/iwce",
         shortName: "iwce",
         xref: "web-platform",
-        group: "my-working-group",
         noRecTrack: true,
         localBiblio: {
           applinks: {
@@ -52,7 +51,7 @@
     <section id="abstract">
 
       <p>
-        Inter Wallet Credential Exchange describes a simple way to exchange identity information in a secure, decentralized and scalable manner.
+        Inter-Wallet Credential Exchange describes a simple way to exchange identity information in a secure, decentralized and scalable manner.
         It uses some standardized data structures, formats and transport protocols to enable applications (particulary identity wallets) from different  manufacturers to communicate with each other, without a third party or an intermediary.
         The main purpose of this approach is to establish a claim-based identity management model in the world wide web.
       </p>
@@ -70,21 +69,21 @@
       <p>
         The Verifiable Credentials Data Model [[vc-data-model]] is used to express simple statements about an entity, like drivers licences, university degrees or government-issued passports etc.
         The ecosystem of this model consists of multiple roles and their actors, which can be identified by some sorts of identifiers.
-        This can be Decentralized Identifiers (DIDs) [[did-core]], Uniform Resource Identifiers (URIs) [[rfc3986]], Uniform Resource Locators (URLs) and so on.
-        By the use of DIDs and their corresponding DID-Documents, they are fully under control by the owner of this DID.
+        This can be decentralized identifiers (DIDs) [[did-core]], Uniform Resource Identifiers (URIs) [[rfc3986]], Uniform Resource Locators (URLs) and so on.
+        By the use of DIDs and their corresponding DID documents, they are fully under control by the owner of this DID.
         Therefore, they have neither trust nor make any statement about the owner itself.
       </p>
 
-      <aside class="note" title="DID-Documents">
+      <aside class="note" title="DID documents">
         <p>
-          It is important to understand, that DID-Documents DOES NOT contain any Personally Identifiable Information (PII).
+          It is important to understand, that DID documents DOES NOT contain any personally identifiable information (PII).
           They are used to describe some technical information about the identifier only.
           For example, this can be public keys, methods for verification, authentication and assertion, or service endpoints.
         </p>
       </aside>
 
       <p>
-        To address this, Verifiable Credentials (VCs) and their corresponding Verifiable Presentations (VPs) can be used.
+        To address this, verifiable credentials (VCs) and their corresponding verifiable presentations (VPs) can be used.
         VCs are cryptographically signed by a (allegedly) trusted issuer, that makes claims about a subject.
         This subject is represented by an identifier, for example, a DID.
         VPs are cryptographically signed by the user to prove that he has the DID specified as subject under control.
@@ -105,15 +104,15 @@
       <p>
         This proposal mainly specifies two data structures and their encoding and transport over HTTPS.
         It describes the use of Universal- or App-Links and their advantages in terms of decentralization.
-        Furthermore, VCs and an additional special data structure are used so that it is possible for users to disclose only certain personal information, without the complexity of Zero Knowledge Proofs.
+        Furthermore, VCs and an additional special data structure are used so that it is possible for users to disclose only certain personal information, without the complexity of zero-knowledge proofs.
       </p>
 
       <p>
         Out of scope are any semantics of concrete VCs and related data structures.
         Moreover, no detailed implementation instructions are given with regard to different development environments, programming languages or operating systems.
-        Another limitation of this specification is the process of issuing the Verifiable Credentials used herein.
+        Another limitation of this specification is the process of issuing the VCs used herein.
         This is done by each service for its own and can be designed individually by the services acting as issuers.
-        It is assumed that corresponding Verifiable Credentials have already been issued to a user in an issuer's application.
+        It is assumed that corresponding VCs have already been issued to a user in an issuer's application.
       </p>
 
       <p>
@@ -129,13 +128,108 @@
 
     <section class="informative">
 
-      <h2>Terms and Definitions</h2>
+      <h2>Terminology</h2>
 
-    </section>
+      <dl class="termlist">
 
-    <section class="informative">
+        <dt><dfn>blockchain</dfn></dt>
+        <dd>
+          description
+        </dd>
 
-      <h2>Abbreviations and Symbols</h2>
+        <dt><dfn>content-addressable storage</dfn></dt>
+        <dd>
+          description
+        </dd>
+
+        <dt><dfn>credential request</dfn></dt>
+        <dd>
+          description
+        </dd>
+
+        <dt><dfn>credential response</dfn></dt>
+        <dd>
+          description
+        </dd>
+      </dl>
+
+        <dt><dfn>decentralized identifier</dfn></dt>
+        <dd>
+          description
+        </dd>
+
+        <dt><dfn>DID document</dfn></dt>
+        <dd>
+          description
+        </dd>
+
+        <dt><dfn>DID method</dfn></dt>
+        <dd>
+          description
+        </dd>
+
+        <dt><dfn>DID resolver</dfn></dt>
+        <dd>
+          description
+        </dd>
+
+        <dt><dfn>digital identity</dfn></dt>
+        <dd>
+          description
+        </dd>
+      </dl>
+
+        <dt><dfn>identifier</dfn></dt>
+        <dd>
+          description
+        </dd>
+
+        <dt><dfn>perfect forward secrecy</dfn></dt>
+        <dd>
+          description
+        </dd>
+
+        <dt><dfn>plaintext credential</dfn></dt>
+        <dd>
+          description
+        </dd>
+
+        <dt><dfn>public key infrastructure</dfn></dt>
+        <dd>
+          description
+        </dd>
+
+        <dt><dfn>single sign-on</dfn></dt>
+        <dd>
+          description
+        </dd>
+
+        <dt><dfn>Transport Layer Security</dfn></dt>
+        <dd>
+          description
+        </dd>
+
+        <dt><dfn>verifiable credential</dfn></dt>
+        <dd>
+          description
+        </dd>
+
+        <dt><dfn>verifiable presentation</dfn></dt>
+        <dd>
+          description
+        </dd>
+
+        <dt><dfn>wallet</dfn></dt>
+        <dd>
+          description
+        </dd>
+
+        <dt><dfn>zero-knowledge proof</dfn></dt>
+        <dd>
+          description
+        </dd>
+
+      </dl>
 
     </section>
 
@@ -146,7 +240,7 @@
       <section class="informative"><h2>Decentralized Identifiers</h2>
 
         <p>
-          Decentralized Identifiers as defined in [[did-core]] are a new type of identifier.
+          DIDs as defined in [[did-core]] are a new type of identifier.
           They are generated and controlled by an entity itself.
           The proof of control is provided by cryptographic methods, e.g. by means of digital signatures.
           There is no limit to the number of DIDs an entity can create.
@@ -177,10 +271,11 @@
 
         <p>
           The DID method specification also contains all the information that a DID resolver needs to resolve a DID.
-          The minimum that a DID method must describe is how the identifier is generated. This is true, for example, for the special Peer DID Method (`did:peer:xyz`), which does not bind to any specific network and is developed for short-duration and bidirectional connections.
+          The minimum that a DID method must describe is how the identifier is generated.
+          This is true, for example, for the special Peer DID Method (`did:peer:xyz`), which does not bind to any specific network and is developed for short-duration and bidirectional connections.
           Most DID methods additionally specify a routing information in which network the identifier is to be found.
           Further information, such as the DID document, can then be retrieved here by a DID resolver.
-          This can be executed locally or remotely and obtain its information from a blockchain, a Content Addressable Storage (CAS) or any other API.
+          This can be executed locally or remotely and obtain its information from a blockchain, a content addressable storage (CAS) or any other API.
         </p>
 
         <p>
@@ -203,12 +298,12 @@
           Additionally it supports a special way implementing the selective disclosure feature.
           This feature gives the credential holder the oppurtunity to choose, which attributes will shown to the verifier.
           To achive this, every attribute value, a credential contains, is hashed with a salt.
-          The final verifiable credential will only contain this hashes - the salts and the values are stored in a separate json data object, called the Plaintext Credential.
-          The following example will show such a Plaintext Credential and its corresponding VC.
+          The final verifiable credential will only contain this hashes - the salts and the values are stored in a separate json data object, called the plaintext credential.
+          The following example will show such a plaintext credential and its corresponding VC.
         </p>
 
         <aside class="example">
-          <p>Plaintext Credential</p>
+          <p>Plaintext credential</p>
           <pre class="json">
             {
               "id": "did:example:0x1611994c317bed3102D65A93B667Dbe0591Da41c",
@@ -229,7 +324,7 @@
         </aside>
 
         <aside class="example">
-          <p>Corresponding Verifiable Credential</p>
+          <p>Corresponding verifiable credential</p>
           <pre class="json">
             {
               "@context": ["https://www.w3.org/2018/credentials/v1",
@@ -279,7 +374,7 @@
           The owner of the corresponding private key of this DID is called the holder.
           This holder can generate a VP from one or more VCs, in which he can prove by a signature that he controls the identifier(s) of one or more VCs.
           The aggregation of this information typically expresses some aspect of a person, organization, or other entity.
-          He finally sends the VP to a verifier that can cryptographically validate the VC's trustworthiness.
+          He finally sends the VP to a verifier that can cryptographically validate the VCs trustworthiness.
         </p>
 
         <aside class="example">
@@ -331,7 +426,7 @@
         </p>
 
         <aside class="example">
-          <p>Verifiable Presentation containing an ID and several Verifiable Credentials, as well as their associated proofs</p>
+          <p>Verifiable presentation containing an ID and several verifiable credentials, as well as their associated proofs</p>
           <pre class="nohighlight">
             {
               "@context": [
@@ -411,7 +506,7 @@
         <p>
           In addition to an expiration date (`expirationDate` or `validUntil`) for credentials, issuers also have the option to revoke it.
           For this purpose, the [[[vc-data-model]]] defines the property `credentialStatus`, which links to a revocation list.
-          This list can be stored on a blockchain, a Content Addressable Storage (CAS) or any other API.
+          This list can be stored on a blockchain, a content addressable storage (CAS) or any other API.
         </p>
 
         <aside class="example">
@@ -430,14 +525,14 @@
 
       <section class="informative" id="uniapplinks">
 
-        <h2>Universal- / App-Links</h2>
+        <h2>Universal / App Links</h2>
 
         <p>
           Universal or app links are a way in mobile operating systems to retrieve certain data from an app using a URL.
-          For Apple's iOS they are documented under the name Universal Links [[universallinks]], for Google they are called Android App Links [[applinks]].
+          For Apple's iOS they are documented under the name universal links [[universallinks]], for Google they are called Android App Links [[applinks]].
           They are a form of deep links that are handled specifically in the operating systems.
           During the installation of an app, a handler for a specific URL is created in the operating system that uniquely identifies the app.
-          To prove ownership of a URL, a check is made for a specific machine-readable document that must be provided under the URL's domain.
+          To prove ownership of a URL, a check is made for a specific machine-readable document that must be provided under the URLs domain.
           After this check is successful, requests to this URL are passed directly to the installed app without any further interaction from the user.
           Binding to a domain ensures uniqueness and the mandatory use of HTTPS ensures authenticity and secrecy.
         </p>
@@ -461,27 +556,30 @@
         <h2>Credential Request</h2>
 
         <p>
-          To request VCs within a VP the following simple JSON data structure MUST be used, which MUST then be encoded in Base64url [[rfc4648]] and attached as a query.
+          To request VCs within a VP the following simple JSON data structure MUST be used, which MUST then be encoded in Base64url [[rfc4648]] and attached as a query to an URL.
           The URIs used comply with the [[[rfc3986]]] specification.
-          Verifiable Credentials and Verifiable Presentations are compliant to the [[[vc-data-model]]].
+          VCs and VPs are compliant to the [[[vc-data-model]]].
         </p>
 
         <p>
-          A Credential Request is defined with the following properties:
+          A credential request is defined with the following properties:
           <dl>
 
           <dt>type</dt>
-            <dd>The `type` property is required and MUST be an URI. The value `"CredentialRequest"` MUST be used to determine that it is a Credential Request.</dd>
+            <dd>
+              The `type` property is required and MUST be an URI. The value `"CredentialRequest"` MUST be used to determine that it is a credential request.
+            </dd>
 
           <dt>accept</dt>
             <dd>
-              The `accept` property is reqired and describes the accepted data of a response to a request. It is defined with the following properties:
+              The `accept` property is required and describes the accepted data of a response to a request. It is defined with the following properties:
             <dl>
 
               <dt>type</dt>
               <dd>
                 The `type` property is required and MUST be an URI.
-                The value `"CredentialResponse"` MUST be used to determine that the requested data is to provided in the form of a Credential Response.</dd>
+                The value `"CredentialResponse"` MUST be used to determine that the requested data is to provided in the form of a credential response.
+              </dd>
 
               <dt>verifiablePresentation<dt>
                 <dd>
@@ -491,13 +589,13 @@
                     <dt>type</dt>
                       <dd>
                         The `type` property is required and MUST be an URI.
-                        It denotes the expected type of the Verifiable Presentation.
+                        It denotes the expected type of the verifiable presentation.
                       </dd>
 
                     <dt>credentialTypes</dt>
                       <dd>
                         The `credentialTypes` property is required and MUST be one or more URIs.
-                        It denotes the accepted URIs of Verifiable Credentials within a Verifiable Presentation.
+                        It denotes the accepted URIs of verifiable credentials within a verifiable presentation.
                       </dd>
                   </dl>
                 </dd>
@@ -522,18 +620,30 @@
                     </dd>
                   </dl>
                 </dd>
-              </dl>
-            </dd>
 
-          <dt>responseUrl</dt>
-            <dd>
-              The `responseUrl` property is reqired and MUST be an URL.
-              The location MUST be a ressource with HTTPS enabled. For best decentralization it is RECOMMENDED to use Universal- or App-Links, see section [[[#uniapplinks]]].
+              <dt>endpoint</dt>
+                <dd>
+                  The `endpoint` property is required. It describes the endpoint to which the requested data has to be send.
+                  <dl>
+                    <dt>type</dt>
+                      <dd>
+                        The `type` property is required and MUST be an URI.
+                        It can take either the value `"AppLink"` or `"WebAddress"`.
+                        `"AppLink"` determines that the endpoint is a universal or app link and is RECOMMENDED for best decentralization, see section [[[#uniapplinks]]].
+                        The value `"WebAddress"` determines that the endpoint is a normal web resource (web address).
+                      </dd>
+                    <dt>location</dt>
+                      <dd>
+                        The `location` property is required and MUST be an URL that links to a resource with HTTPS enabled.
+                      </dd>
+                  </dl>
+                </dd>
+              </dl>
             </dd>
 
           <dt>challenge</dt>
             <dd>
-              The `challenge` property is reqired and MUST be a long random number.
+              The `challenge` property is required and MUST be a long random number.
               It is RECOMMENDED to use at least 128 bit. For example, an UUID [[rfc4122]] might be helpful for this task.
               The challenge is computed by the verifier and MUST have a Time to Live (TTL).
             </dd>
@@ -541,13 +651,13 @@
           <dt>domain</dt>
             <dd>
               The `domain` property is optional and MUST be an URI.
-              It is used to announce domain-specific extensions in a Credential Request.
+              It is used to announce domain-specific extensions in a credential request.
             </dd>
           </dl>
         </p>
 
         <aside class="example">
-          <p>Credential Request data object</p>
+          <p>Credential request data object</p>
           <pre class="json">
             {
                 "type": "CredentialRequest",
@@ -562,9 +672,12 @@
                         "requiredProperties": {
                             "AgeCredential": ["age"]
                         },
+                    },
+                    "endpoint": {
+                        "type": "AppLink",
+                        "location": "https://verifier-app.another-example.com/responses"
                     }
                 },
-                "responseUrl": "https://verifier-app.another-example.com/responses",
                 "challenge": "1f44d55f-f161-4938-a659-f8026467f126",
                 "domain": "example.com"
             }
@@ -578,15 +691,15 @@
         </p>
 
         <aside class="example">
-          <p>Encoded Credential Request</p>
+          <p>Encoded credential request</p>
           <pre class="nohighlight">
             https://issuer-app.example.com/requests?<span style="color: #008000; font-weight: bold">iwce=eyAidHlwZSI6ICJDc...IgfQ</span>
           </pre>
         </aside>
 
-        <aside class="note" title="QR-Codes">
+        <aside class="note" title="QR codes">
           <p>
-            For use with web applications on a desktop, the URL including the encoded Credential Request can be represented as a QR code.
+            For use with web applications on a desktop, the URL including the encoded credential request can be represented as a QR code.
             Depending on the type used, there may be restrictions on the amount of data that can be encoded.
             Since the challenge has a TTL, the QR code has to be rerendered frequently.
           </p>
@@ -599,7 +712,9 @@
         <h2>Credential Response</h2>
 
         <p>
-          To respond to a request for a VP the following data structure MUST be used, which MUST then be encoded in Base64url [[rfc4648]] and attached as a query. The URIs used comply with the [[[rfc3986]]] specification. Verifiable Credentials and Verifiable Presentations are compliant to the [[[vc-data-model]]].
+          To respond to a request for a VP the following data structure MUST be used, which MUST then be encoded in Base64url [[rfc4648]] and attached as a query to an URL.
+          The URIs used comply with the [[[rfc3986]]] specification.
+          VCs and VPs are compliant to the [[[vc-data-model]]].
         </p>
 
         <p>
@@ -608,13 +723,13 @@
             <dt>type</dt>
               <dd>
                 The `type` property is required and MUST be an URI.
-                The value `"CredentialResponse"` MUST be used to determine that it is a Credential Response.
+                The value `"CredentialResponse"` MUST be used to determine that it is a credential response.
               </dd>
 
             <dt>verifiablePresentation</dt>
               <dd>
-                The `verifiablePresentation` property is required and defined as an object that contain exactly one Verifiable Presentation.
-                The proofs within a Verifiable Presentation MUST contain the `challenge` property that was received with a Credential Request.
+                The `verifiablePresentation` property is required and defined as an object that contain exactly one verifiable presentation.
+                The proofs within a verifiable presentation MUST contain the `challenge` property that was received with a credential request.
                 The proofs can also contain the `domain` property to announce domain-specific extensions
               </dd>
 
@@ -623,24 +738,33 @@
                 The `selectiveDisclosure` property is optional.
                 If it is not set, no method for selective disclosure is supported.
                 <dl>
+
+                  <dt>type</dt>
+                    <dd>
+                      The `type` property is required and MUST be an URI.
+                      It denotes the expected method of the selective disclosure feature.
+                    </dd>
+
                   <dt>plaintextCredential</dt>
                     <dd>
                       The `plaintextCredential` property is type specific.
                       The expected return value is data conforming to the type information from a credential request.
-                      For the selective disclosure feature proposed in section [[[#selective-disclosure]]] the `plaintextCredential` property is defined as a set of objects that contain one or more Plaintext Credentials (`HashedPlaintextCredential2021`).
+                      For the selective disclosure feature proposed in section [[[#selective-disclosure]]] the `plaintextCredential` property is defined as a set of objects that contain one or more plaintext credentials.
                     </dd>
+
                 </dl>
               </dd>
           </dl>
         </p>
 
           <aside class="example">
-            <p>Credential Response data object</p>
+            <p>Credential response data object</p>
             <pre class="json">
               {
                   "type": "CredentialResponse",
                   "verifiablePresentation": {},
                   "selectiveDisclosure": {
+                      "type": "HashedPlaintextCredential2021",
                       "plaintextCredential": [{},{}]
                   }
               }
@@ -654,7 +778,7 @@
         </p>
 
         <aside class="example">
-          <p>Encoded Credential Response</p>
+          <p>Encoded credential response</p>
           <pre class="nohighlight">
             https://verifier-app.another-example.com/responses?<span style="color: #008000; font-weight: bold">iwce=JWZXJpZmlhYmxlUHJ...JodH</span>
           </pre>
@@ -666,7 +790,7 @@
 
     <section id="sds">
 
-      <h2>Strict domain separation</h2>
+      <h2>Strict Domain Separation</h2>
 
       <p>
         The use of multiple proofs in a VP makes it possible to strictly separate the domains of identity information.
@@ -677,7 +801,7 @@
       </p>
 
       <ul>
-        <li>an issuer can decide how to store the private keys of a subject for which it issues Verifiable Credentials (security levels)</li>
+        <li>an issuer can decide how to store the private keys of a subject for which it issues verifiable credentials (security levels)</li>
         <li>an issuer can enforce security mechanisms such as two-factor authentication</li>
         <li>an issuer can customize the issuance process to meet its specific needs</li>
         <li>areas of responsibility are clearly delineated</li>
@@ -687,7 +811,7 @@
 
       <p>
         Since the proofs in a VP can be made with different identifiers, an issuers application is able to interoperate with different types of identifiers.
-        For example, the identfier of a VP can be an address in Blockchain A and the identfiers of the VCs are DIDs anchored in Blockchain B.
+        For example, the identfier of a VP can be an address in blockchain A and the identfiers of the VCs are DIDs anchored in blockchain B.
         The latter is a blockchain in the issuer's domain, blockchain A is that of a third party application.
         In that way a user can prove control over an address in any blockchain or any other identfier in combination with verifiable personal information.
         For this to work, both issuer and verifier MUST implement all methods of the identifiers used.
@@ -707,22 +831,22 @@
       <h2>User Experience</h2>
 
       <p>
-        Considerations about end-user experience are closely related to the use of app/universal links and VCs/VPs.
-        App/Universal links enable a seemless user experience during exchange of VPs between apps on the user's device, because, when implemented correctly, they identify the app the operating system should open.
-        Additionally, these links are normal URLs and can be represented in any form a URL can take, e.g. as QR-Code.
-        Therefore, an exchange between different devices (smartphone and desktop) is possible without loss in user-experience, because the QR-code can be scanned with every app capable of doing so and the user is redirected to the requested app.
+        Considerations about end-user experience are closely related to the use of app or universal links and VCs/VPs.
+        App or universal links enable a seemless user experience during exchange of VPs between apps on the user's device, because, when implemented correctly, they identify the app the operating system should open.
+        Additionally, these links are normal URLs and can be represented in any form a URL can take, e.g. as QR code.
+        Therefore, an exchange between different devices (smartphone and desktop) is possible without loss in user experience, because the QR code can be scanned with every app capable of doing so and the user is redirected to the requested app.
       </p>
 
       <p>
         With VCs/VPs it is possible to exchange personal Information in a verifiable and data-conserving manner.
-        In most use-cases they simplify the disclosure of these information during for example a registration process.
+        In most use cases they simplify the disclosure of these information during for example a registration process.
         Using VCs/VPs the user must not input the information by hand but only has to send a VP.
-        The service requesting the information could rely on them, because they are signed by an issuer (Only if the service trusts the issuer).
+        The service requesting the information could rely on them, because they are signed by an issuer (only if the service trusts the issuer).
       </p>
 
       <p>
-        Additionally, this proposal enables every service-provider that has an own app including credential and their exchange functionality in its own app without relying on a central so called identity wallet to store the issued credential.
-        From the user perspective he/she only has to rely on the issuer and its application, not in an intermediary wallet service/app for storing the credentials.
+        Additionally, this proposal enables every service provider that has an own app including credential and their exchange functionality in its own app without relying on a central so called identity wallet to store the issued credential.
+        From the user perspective he or she only has to rely on the issuer and its application, not in an intermediary wallet service or app for storing the credentials.
       </p>
 
     </section>
@@ -736,14 +860,14 @@
         <h2>Perfect Forward Secrecy</h2>
 
         <p>
-          Because of HTTPS is used to transport Credential Requests and Credential Responses between two applications, Perfect Forward Secrecy (PFS) is substantial in most of the abailable implementations.
+          Because of HTTPS is used to transport credential requests and credential responses between two applications, perfect forward secrecy (PFS) is substantial in most of the available implementations.
           Please note, that this applies only to the network connection while requests or responses are made.
           The including VP and its VCs signed by the holder and one or more issuers are unaffected.
           When using QR codes for a request, this security requirement is obsolete.
         </p>
 
         <p>
-          Since TLS operates in the network layer, it ensures that the information transferred within a URL is also protected (e.g. a query).
+          Since Transport Layer Security (TLS) operates in the network layer, it ensures that the information transferred within a URL is also protected (e.g. by a query).
         </p>
 
       </section>
@@ -753,7 +877,7 @@
         <h2>Trust</h2>
 
         <p>
-          Because of HTTPS is used to transport Credential Requests and Credential Responses between two applications, the underlying PKI system of TLS (X.509) builds trust for this connection, in that way, that the communication endpoints are the intended ones.
+          Because of HTTPS is used to transport credential requests and credential responses between two applications, the underlying PKI system of TLS (X.509) builds trust for this connection, in that way, that the communication endpoints are the intended ones.
           This is helpful to identify the applications that want to do a credential exchange.
         </p>
 
@@ -787,11 +911,11 @@
           Individual aspects of a digital identity are only stored within the app of a service that acts as issuer for it.
           Other services that trust the aforementioned service as issuer and are interested in these individual aspects of that identity can submit a request to the app of this issuer to return a VP.
           Further aspects of a digital identity can in turn be requested from apps of other services or issuers in the same way.
-          Each app acts as a wallet software and stores private keys that never leave it and are used to authenticate with its own back-end (e.g., DID Auth).
+          Each app acts as a wallet software and stores private keys that never leave it and are used to authenticate with its own back end (e.g., DID Auth).
           Services acting as issuers also store the VCs they issue themselves only in their own apps on the end devices of the users (and possibly as a backup in their own back end).
           Only this app is ultimately able to sign a requested VP because only it has the corresponding private keys.
           The user's own digital identity is thus formed from a large number of apps from different manufacturers or services, which exchange VPs with each other.
-          As a result, the stakeholders' areas of responsibility are clearly delineated, the correlation of personal data by intermediaries is made difficult or almost impossible, and decentralization is achieved to a high degree by the direct exchange of identity information between two apps.
+          As a result the correlation of personal data by intermediaries is made more difficult and decentralization is achieved to a high degree by the direct exchange of identity information between two apps directly.
           The private keys stored in the respective apps also relieve the user of the need to enter passwords.
         </p>
 
@@ -800,7 +924,30 @@
     </section>
 
     <section class="informative">
-      <h2>Future Prospects</h2>
+
+      <h2>Bootstrapping</h2>
+
+      <p>
+        For an app that is launched for the first time and wants to communicate with its back end, the omission of passwords requires that at least one other app is installed on the user's device that provides a VC accepted by the first app.
+        By sending a DID, the back end system merely learns about a new device, but does not yet have any verifiable information about the user and his identity.
+        If no app from another trusted issuer can be relied upon, a newly computed DID must be associated with a digital identity in some other way.
+        In the worst case, the user must visit an issuer in person and identify himself to him (ID card, driver's license, etc.) and transmit the corresponding DID (e.g., by QR code).
+        It is also conceivable that some issuers will additionally offer other procedures for establishing identity.
+        For example, the combination with an online ID function of the ID card could be a suitable starting point for some issuers.
+        In addition, government agencies could also act as issuers and offer VCs in their apps after authentication with the ID card has been successful.
+        RFID cards, PINs/TANs/links via mail or e-mail, second devices, and many more are also ways to support bootstrapping during the initial launch of an application on a new end device which will support VCs/VPs.
+        The greater the variety of applications that support VCs and VPs, the easier and more convenient it will be for the user.
+      </p>
+
+      <p>
+        Furthermore, TLS and PKIs according to X.509 play an important role as a complement to DIDs.
+        They support bootstrapping in terms of trustworthiness and for channel security between two wallets.
+        HTTPS in particular is widely used today.
+        It ensures the authenticity of (mostly) domain names and provides encrypted transport of data.
+        The trust hierarchies in today's PKIs are largely established, and TLS is easy to use as transport security in today's network infrastructures (NAT, firewalls, etc.).
+        With more widespread use of DIDs and VCs and the associated trust structures, these can also be used later for server-side authentication, but initially they will only replace the little-used TLS client certificates in a more flexible way.
+      </p>
+
     </section>
 
     <section id="conformance">
