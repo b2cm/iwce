@@ -475,7 +475,7 @@
 
           <dt>accept</dt>
             <dd>
-              The `accept` property is reqired and describes the accepted data of a response to a request. It is defined with the following properties:
+              The `accept` property is required and describes the accepted data of a response to a request. It is defined with the following properties:
             <dl>
 
               <dt>type</dt>
@@ -530,13 +530,13 @@
                     <dt>type</dt>
                       <dd>
                         The `type` property is required and MUST be an URI.
-                        The value `"AppLink"` SHOULD be used to determine that the endpoint is a Universal- or App-Link.
-                        For best decentralization it is RECOMMENDED to use Universal- or App-Links, see section [[[#uniapplinks]]].
-                        The value `"WebAddress"` MAY be used to determine that the endpoint is a normal web resource (web address).
+                        It can take either the value `"AppLink"` or `"WebAddress"`.
+                        `"AppLink"` determines that the endpoint is a Universal- or App-Link and is RECOMMENDED for best decentralization, see section [[[#uniapplinks]]].
+                        The value `"WebAddress"` determines that the endpoint is a normal web resource (web address).
                       </dd>
                     <dt>location</dt>
                       <dd>
-                        The `location` property is reqired and MUST be an URL that links to a resource with HTTPS enabled.
+                        The `location` property is required and MUST be an URL that links to a resource with HTTPS enabled.
                       </dd>
                   </dl>
                 </dd>
@@ -545,7 +545,7 @@
 
           <dt>challenge</dt>
             <dd>
-              The `challenge` property is reqired and MUST be a long random number.
+              The `challenge` property is required and MUST be a long random number.
               It is RECOMMENDED to use at least 128 bit. For example, an UUID [[rfc4122]] might be helpful for this task.
               The challenge is computed by the verifier and MUST have a Time to Live (TTL).
             </dd>
