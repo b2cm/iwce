@@ -131,103 +131,178 @@
 
       <h2>Terminology</h2>
 
-      <dl class="termlist">
+      <dl class="termlist" data-sort>
 
         <dt><dfn>blockchain</dfn></dt>
         <dd>
-          description
+          Also referred to as <strong><em><dfn data-abbr="DLT">distributed ledger</dfn></em></strong>, is a non-centralized system for recording events. These systems establish sufficient confidence for participants to rely upon the data recorded by others to make operational decisions. They typically use distributed databases where different nodes use a consensus protocol to confirm the ordering of cryptographically signed transactions. The linking of digitally signed transactions over time often makes the history of the ledger effectively immutable.
         </dd>
 
-        <dt><dfn>content-addressable storage</dfn></dt>
+        <dt><dfn data-abbr="CAS">content-addressable storage</dfn></dt>
         <dd>
-          description
+          Content-addressable storage, also referred to as content-addressed storage or abbreviated CAS, is a way to store information so it can be retrieved based on its content, not its location.
+          CAS typically uses a cryptographic [=hash=] function's digest generated from the document to identify that document in the storage system.
         </dd>
 
         <dt><dfn>credential request</dfn></dt>
         <dd>
-          description
+          A data structure to make a request for a [=verifiable presentation=] containing one or more [=verifiable credentials=].
         </dd>
 
         <dt><dfn>credential response</dfn></dt>
         <dd>
-          description
+          A data structure to make a response to a [=credential request=] containing one [=verifiable presentation=] with one or more [=verifiable credentials=]. Additionally, one or more [=plaintext credentials=] may be provided.
         </dd>
-      </dl>
 
-        <dt><dfn>decentralized identifier</dfn></dt>
-        <dd>
-          description
-        </dd>
+        <dt><dfn data-abbr="DID">decentralized identifier</dfn></dt>
+          <dd>
+            A portable URL-based [=identifier=], also known as a DID, associated with an [=entity=].
+            These [=identifiers=] are most often used in a [=verifiable credential=] and are associated with [=subjects=].
+          </dd>
 
         <dt><dfn>DID document</dfn></dt>
         <dd>
-          description
+          A document that is accessible using a [=verifiable data registry=] and contains information related to a specific [=decentralized identifier=], such as the associated public key information.
         </dd>
 
         <dt><dfn>DID method</dfn></dt>
         <dd>
-          description
+          A definition of how a specific DID method scheme is implemented. A DID method is defined by a DID method specification, which specifies the precise operations by which DID's and [=DID documents=] are created, resolved, updated, and deactivated
         </dd>
 
         <dt><dfn>DID resolver</dfn></dt>
         <dd>
-          description
+          A DID resolver is a software and/or hardware component that performs the DID resolution function by taking a DID as input and producing a conforming [=DID document=] as output.
         </dd>
 
-        <dt><dfn>digital identity</dfn></dt>
+        <dt><dfn>identity</dfn></dt>
         <dd>
-          description
+          The means for keeping track of [=entities=] across contexts.
+          Digital identities enable tracking and customization of [=entity=] interactions across digital contexts, typically using [=identifiers=] and attributes.
         </dd>
-      </dl>
+
+        <dt><dfn>entity</dfn></dt>
+        <dd>
+          A thing with distinct and independent existence, such as a person, organization, or device that performs one or more roles in the ecosystem.
+        </dd>
 
         <dt><dfn>identifier</dfn></dt>
         <dd>
-          description
+          An identifier is a name that identifies either a unique object or a unique class of objects, where the "object" or class may be an idea, [=entity=] (or class thereof), physical object (or class thereof) or other.
+          An identifier may be a word, number, letter, symbol, or any combination of those.
         </dd>
 
-        <dt><dfn>perfect forward secrecy</dfn></dt>
+        <dt><dfn data-abbr="PFS">perfect forward secrecy</dfn></dt>
         <dd>
-          description
+          In cryptography, this is a feature of specific key agreement protocols that gives assurances that session keys will not be compromised even if long-term secrets used in the session key exchange are compromised.
+          For HTTPS, the long-term secret is typically the Private signing key of the server.
+          Forward secrecy protects past sessions against future compromises of keys or passwords.
         </dd>
 
         <dt><dfn>plaintext credential</dfn></dt>
         <dd>
-          description
+          A data structure that store plain values and [=salts=] that serve as input to a [=hash=] function and are used to implement the [=selective disclosure=] feature in a [=verifiable credential=].
         </dd>
 
         <dt><dfn>public key infrastructure</dfn></dt>
         <dd>
-          description
+          A set of roles, policies, hardware, software and procedures needed to create, manage, distribute, use, store and revoke digital certificates and manage public-key encryption.
         </dd>
 
         <dt><dfn>single sign-on</dfn></dt>
         <dd>
-          description
+          An authentication scheme that allows a user to log in with a single [=identifier=] and password to any of several related, yet independent, software systems.
         </dd>
 
-        <dt><dfn>Transport Layer Security</dfn></dt>
+        <dt><dfn data-abbr="TLS">Transport Layer Security</dfn></dt>
         <dd>
-          description
+          A cryptographic protocol designed to provide communications security over a computer network. It aims primarily to provide privacy and data integrity between two or more communicating computer applications.
         </dd>
 
-        <dt><dfn>verifiable credential</dfn></dt>
+        <dt><dfn data-abbr="VC">verifiable credential</dfn></dt>
         <dd>
-          description
+          A standard data model and representation format for cryptographically-verifiable digital credentials as defined by the W3C Verifiable Credentials specification [[vc-data-model]].
         </dd>
 
-        <dt><dfn>verifiable presentation</dfn></dt>
+        <dt><dfn data-abbr="VP">verifiable presentation</dfn></dt>
         <dd>
-          description
+          A standard data model and representation format for tamper-evident presentation of data derived from one or more [=verifiable credentials=] as defined by the W3C Verifiable Credentials specification [[vc-data-model]].
         </dd>
 
         <dt><dfn>wallet</dfn></dt>
         <dd>
-          description
+          A wallet in the context of cryptocurrency or [=identity=] is a device, physical medium, program or a service which stores the public and/or private keys for cryptocurrency transactions or other data structures.
+          In addition, a wallet usually offers the functionality of encrypting and/or signing data.
         </dd>
 
         <dt><dfn>zero-knowledge proof</dfn></dt>
         <dd>
-          description
+          In cryptography, a zero-knowledge proof or zero-knowledge protocol is a method by which one party (the prover or [=holder=]) can prove to another party (the [=verifier=]) that they know a value, without conveying any information apart from the fact that they know this value.
+        </dd>
+
+        <dt><dfn>holder</dfn></dt>
+        <dd>
+          A role an [=entity=] might perform by possessing one or more [=verifiable credentials=] and generating [= verifiable presentations=] from them.
+          A [=holder=] is usually, but not always, a [=subject=] of the [=verifiable credentials=] they are holding.
+        </dd>
+
+        <dt><dfn>issuer</dfn></dt>
+        <dd>
+          A role an [=entity=] can perform by asserting [=claims=] about one or more [=subjects=], creating a [=verifiable credential=] from these [=claims=], and transmitting the [=verifiable credential=] to a [=holder=].
+        </dd>
+
+        <dt><dfn>subject</dfn></dt>
+        <dd>
+          A thing about which [=claims=] are made.
+        </dd>
+
+        <dt><dfn>verifier</dfn></dt>
+        <dd>
+          A role an [=entity=] performs by receiving one or more [=verifiable credentials=] inside a [=verifiable presentation=] for processing.
+          Other specifications might refer to this concept as a <dfn>relying party</dfn>.
+        </dd>
+
+        <dt><dfn data-abbr="URI">Uniform Resource Identifier</dfn></dt>
+        <dd>
+          A Uniform Resource Identifier, as defined by [[rfc3986]].
+          A special subtype of an URI is the <strong><em><dfn data-abbr="URL">Uniform Resource Locator</dfn></em></strong>.
+        </dd>
+
+        <dt><dfn>digital signature</dfn></dt>
+        <dd>
+        A mathematical scheme for demonstrating the authenticity of a digital message.
+        </dd>
+
+        <dt><dfn>claim</dfn></dt>
+        <dd>
+          An assertion made about a [=subject=].
+        </dd>
+
+        <dt><dfn>selective disclosure</dfn></dt>
+        <dd>
+          The ability of a [=holder=] to make fine-grained decisions about what information of a [=verifiable credential=] to share.
+        </dd>
+
+        <dt><dfn>verifiable data registry</dfn></dt>
+        <dd>
+          A system that facilitates the creation, verification, updating, and/or deactivation of [=decentralized identifiers=] and [=DID documents=]. A verifiable data registry might also be used for other cryptographically-verifiable data structures such as [=verifiable credentials=]. For more information, see the W3C Verifiable Credentials specification [[vc-data-model]].
+        </dd>
+
+        <dt><dfn>hash</dfn></dt>
+        <dd>
+           The values returned by a hash function are called hash values, hash codes, digests, or simply hashes.
+           A hash function is any one-way function that can be used to map data of arbitrary size to fixed-size values.
+        </dd>
+
+        <dt><dfn>salt</dfn></dt>
+        <dd>
+          In cryptography, a salt is random data that is used as an additional input to a one-way function that [=hashes=] data, a password or passphrase.
+        </dd>
+        <dt><dfn data-abbr="HTTP">Hypertext Transfer Protocol</dfn></dt>
+        <dd>
+          An application layer protocol for distributed, collaborative, hypermedia information systems designed within the framework of the Internet protocol suite.
+          HTTP resources are identified and located on the network by URL's.
+          An extension of HTTP is <strong><em><dfn data-abbr="HTTPS">Hypertext Transfer Protocol Secure</dfn></em></strong>, which uses TLS to encrypt the communication protocol.
         </dd>
 
       </dl>
