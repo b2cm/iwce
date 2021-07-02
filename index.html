@@ -52,7 +52,7 @@
 
       <p>
         Inter-Wallet Credential Exchange describes a simple way to exchange identity information in a secure, decentralized and scalable manner.
-        It uses some standardized data structures, formats and transport protocols to enable applications (particulary identity wallets) from different  manufacturers to communicate with each other, without a third party or an intermediary.
+        It uses standardized data structures, formats and transport protocols to enable applications (particulary identity wallets) from different manufacturers to communicate with each other, without a third party or an intermediary.
         The main purpose of this approach is to establish a claim-based identity management model in the world wide web.
       </p>
 
@@ -67,33 +67,33 @@
       <h2>Introduction</h2>
 
       <p>
-        The Verifiable Credentials Data Model [[vc-data-model]] is used to express simple statements about an entity, such as driver's licences, university degrees or government-issued passports etc.
+        In the real world an identity could be proofed physically showing the own id card, driver's license or student id to any other person requesting it.
+        In the digital world, things become more complicated.
+        Here a way expressing the information of such credentials is needed, also a way proofing possion of it and a way sending it to a requesting party.
+      </p>
+
+      <p>
+        The Verifiable Credentials Data Model [[vc-data-model]] is used to solve the first aformentioned challenge.
         The ecosystem of this model consists of multiple roles and their actors identifiable by some kind of identifiers.
         These can be decentralized identifiers (DIDs) [[did-core]], Uniform Resource Identifiers (URIs) [[rfc3986]], Uniform Resource Locators (URLs) and so on.
-        By the use of DIDs and their corresponding DID documents, they are fully under control of their owning entity.
+        By the use of DIDs and their corresponding DID documents, the identidier is fully under control of its owning entity.
         Therefore, they are neither trustworthy nor make any statement about their owner itself.
       </p>
 
       <p>
-        To address this, verifiable credentials (VCs) and their corresponding verifiable presentations (VPs) can be used.
+        To address this problem, verifiable credentials (VCs) and their corresponding verifiable presentations (VPs) can be used.
         VCs are cryptographically signed by a (supposedly) trusted issuer and make claims about the aformentioned owner of an identifier.
         This owner is refered to as holder.
         If the holder wishes to proof ownership of a VC, VPs are used.
-        These are cryptographically signed by the holder to prove that he controls the identifier.
+        These are cryptographically signed by the holder to prove control of the identifier.
+        Therefor VPs solve the second listed challenge mentioned at the beginning.
       </p>
-
-      <aside class="note" title="DID documents">
-        <p>
-          It is important to understand, that DID documents DO NOT contain any personally identifiable information (PII).
-          They are only used to describe some technical information about the identifier.
-          Thsi can be for example public keys, methods for verification, authentication and assertion, or service endpoints.
-        </p>
-      </aside>
 
       <p>
         The Inter Wallet Credential Exchange uses DIDs, VCs and VPs in conjunction with HTTPS to transport identity information between two applications directly.
         For optimal decentralization, it is recommended to use special URLs known as Universal-Links [[universallinks]] or App-Links [[applinks]] respectively.
         In the case of web applications running on a desktop, in conjunction with a mobile device, these links can be transferred using a QR code.
+        So Inter Wallet Credential Exchange proposes an solution to the third listed challlenge in digitalization of credentials.
       </p>
 
     </section>
@@ -272,6 +272,14 @@
           The latter are details of services or storage locations that can be linked to the identifier.
           A DID document never contains personal information.
         </p>
+
+        <aside class="note" title="DID documents">
+          <p>
+            It is important to understand, that DID documents DO NOT contain any personally identifiable information (PII).
+            They are only used to describe some technical information about the identifier.
+            These can be for example public keys, methods for verification, authentication and assertion, or service endpoints.
+          </p>
+        </aside>
 
         <p>
           In some DID methods, the identifiers have cryptographic material or a fingerprint of a public key, just as they do in a blockchain.
