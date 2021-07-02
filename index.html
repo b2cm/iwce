@@ -688,12 +688,13 @@
         <p>
           The encoded JSON data object MUST be attached as a query to the URL of the application that will process the request.
           The encoding scheme MUST be Base64url [[rfc4648]].
+          To identify that it is a Inter-Wallet Credential Exchange the key label `iwce` MUST be used.
         </p>
 
         <aside class="example">
           <p>Encoded credential request</p>
           <pre class="nohighlight">
-            https://issuer-app.example.com/requests?<span style="color: #008000; font-weight: bold">eyAidHlwZSI6ICJDc...IgfQ</span>
+            https://issuer-app.example.com/requests?<span style="color: #008000; font-weight: bold">iwce=eyAidHlwZSI6ICJDc...IgfQ</span>
           </pre>
         </aside>
 
@@ -775,12 +776,13 @@
         <p>
           This encoded JSON data object MUST be attached as a query to the URL of the application that will process the response.
           The encoding scheme MUST be Base64url [[rfc4648]].
+          To identify that it is a Inter-Wallet Credential Exchange the key label `iwce` MUST be used.
         </p>
 
         <aside class="example">
           <p>Encoded credential response</p>
           <pre class="nohighlight">
-            https://verifier-app.another-example.com/responses?<span style="color: #008000; font-weight: bold">JWZXJpZmlhYmxlUHJ...JodH</span>
+            https://verifier-app.another-example.com/responses?<span style="color: #008000; font-weight: bold">iwce=JWZXJpZmlhYmxlUHJ...JodH</span>
           </pre>
         </aside>
 
