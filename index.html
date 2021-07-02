@@ -93,7 +93,7 @@
         The Inter Wallet Credential Exchange uses DIDs, VCs and VPs in conjunction with HTTPS to transport identity information between two applications directly.
         For optimal decentralization, it is recommended to use special URLs known as Universal-Links [[universallinks]] or App-Links [[applinks]] respectively.
         In the case of web applications running on a desktop, in conjunction with a mobile device, these links can be transferred using a QR code.
-        So Inter Wallet Credential Exchange proposes an solution to the third listed challlenge in digitalization of credentials.
+        So Inter Wallet Credential Exchange proposes a solution to the third listed challenge in digitalization of credentials.
       </p>
 
     </section>
@@ -121,7 +121,7 @@
         Rather, the aim is to speed up the registration process for new services and to replace the login with passwordless procedures.
         The latter takes place exclusively within a service's own domain (see [[[#sds]]] and [[[#anti-correlation]]]).
         However, the authentication of devices or applications against their own backend is not the actual concern either.
-        The DIDs described here or other asymmetric cryptography methods (e.g. Web Authentication) are suitable for this .
+        The DIDs described here or other asymmetric cryptography methods (e.g. Web Authentication) are suitable for this.
         For existing systems, it is also conceivable that other authentication methods that are currently in widespread use, such as the legacy username and password, or centralized schemes such as OAuth or OpenID, could be used to authenticate within one's domain.
       </p>
 
@@ -299,8 +299,17 @@
 
         <p>
           This proposal makes use of VCs and VPs according to the [[[vc-data-model]]].
-          Additionally it supports a special way implementing the selective disclosure feature.
-          This feature gives the credential holder the oppurtunity to choose, which attributes will be shown to the verifier.
+          VCs are data structures making statements about a person or an object according to the principles of claim-based identity.
+          They are cryptographically verifiable because they are signed by an issuer.
+          The claims are simple statements associated with an identifier and some metadata.
+          Basically, anyone can act as an issuer, e.g., a trusted entity or even oneself.
+          The latter type of VCs are called self-issued credentials and are useful, for example, for delegating one's own credential to another identifier.
+          What should be considered a trusted entity for certain statements is not part of the proposal.
+        </p>
+
+        <p>
+          Additionally to VCs described in the aformentioned specification [[[vc-data-model]]] this proposal supports a special way implementing the selective disclosure feature.
+          This feature gives the credential holder the oppurtunity to choose, which attributes should be shown to the verifier.
           To achive this, every attribute value a credential contains, is hashed with a salt.
           The final verifiable credential will only contain this hashes - the salts and the values are stored in a separate json data object, called the plaintext credential.
           The following example will show such a plaintext credential and its corresponding VC.
@@ -350,15 +359,6 @@
             }
           </pre>
         </aside>
-
-        <p>
-          VCs are data structures making statements about a person or an object according to the principles of claim-based identity.
-          They are cryptographically verifiable because they are signed by an issuer.
-          The claims are simple statements associated with an identifier and some metadata.
-          Basically, anyone can act as an issuer, e.g., a trusted entity or even oneself.
-          The latter type of VCs are called self-issued credentials and are useful, for example, for delegating one's own credential to another identifier.
-          What should be considered a trusted entity for certain statements is not part of the proposal.
-        </p>
 
       </section>
 
