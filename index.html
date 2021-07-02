@@ -601,7 +601,8 @@
                   <dt>requiredProperties</dt>
                     <dd>
                       The `requiredProperties` property is is type specific.
-                      For the selective disclosure feature proposed in section [[[#selective-disclosure]]] the `requiredProperties` property MUST be an object that contains one or more arrays of strings corresponding to the property names of one or more plaintext credentials that have to be disclosed.
+                      For the selective disclosure feature proposed in section [[[#selective-disclosure]]] the `requiredProperties` property MUST be an object that contains one or more arrays of strings corresponding to the property names of one or more plaintext credentials mandatorily beeing disclosed.
+                      To refer to properties in nested objects within the plaintext credential the notation `parentObjectKey.childPropertyKey` MUST be used.
                       The key of each set MUST correspond to the credential type specified in property `credentialTypes`.
                       Which properties are then really returned is not guaranteed and has to be checked in the response.
                     </dd>
