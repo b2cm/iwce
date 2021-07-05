@@ -42,6 +42,11 @@
             href: "https://identity.foundation/specs/did-configuration/",
             publisher: "Decentralized Identity Foundation",
           },
+          openidconnect: {
+            title: "OpenID Connect Core 1.0 incorporating errata set 1",
+            href: "https://openid.net/specs/openid-connect-core-1_0.html",
+            publisher: "OpenID Foundation",
+          },
         },
       };
     </script>
@@ -67,7 +72,7 @@
       <h2>Introduction</h2>
 
       <p>
-        In the real world an [=identity=] could be proofed physically showing the own id card, driver's license or student id to any other person requesting it.
+        In the real world an [=identity=] could be proofed physically showing the own ID card, driver's license or student ID to any other person requesting it.
         In the digital world, things become more complicated.
         Here a way expressing the information of such credentials is needed, also a way proofing possion of it and a way sending it to a requesting party.
       </p>
@@ -90,10 +95,10 @@
       </p>
 
       <p>
-        The Inter Wallet Credential Exchange uses DIDs, VCs and VPs in conjunction with HTTPS to transport [=identity=] information between two applications directly.
+        The Inter-Wallet Credential Exchange uses DIDs, VCs and VPs in conjunction with HTTPS to transport [=identity=] information between two applications directly.
         For optimal decentralization, it is recommended to use special URLs known as Universal-Links [[universallinks]] or App-Links [[applinks]] respectively.
         In the case of web applications running on a desktop, in conjunction with a mobile device, these links can be transferred using a QR code.
-        So Inter Wallet Credential Exchange proposes a solution to the third listed challenge in digitalization of credentials.
+        So Inter-Wallet Credential Exchange proposes a solution to the third listed challenge in digitalization of credentials.
       </p>
 
     </section>
@@ -122,7 +127,7 @@
         The latter takes place exclusively within a service's own domain (see [[[#sds]]] and [[[#anti-correlation]]]).
         However, the authentication of devices or applications against their own backend is not the actual concern either.
         The DIDs described here or other asymmetric cryptography methods (e.g. Web Authentication) are suitable for this.
-        For existing systems, it is also conceivable that other authentication methods that are currently in widespread use, such as the legacy username and password, or centralized schemes such as OAuth or OpenID, could be used to authenticate within one's domain.
+        For existing systems, it is also conceivable that other authentication methods that are currently in widespread use, such as the legacy username and password, or centralized schemes such as OAuth [[rfc6749]] or OpenID Connect [[openidconnect]], could be used to authenticate within one's domain.
       </p>
 
     </section>
@@ -270,7 +275,7 @@
 
         <dt><dfn>digital signature</dfn></dt>
         <dd>
-        A mathematical scheme for demonstrating the authenticity of a digital message.
+          A mathematical scheme for demonstrating the authenticity of a digital message.
         </dd>
 
         <dt><dfn>claim</dfn></dt>
@@ -298,11 +303,35 @@
         <dd>
           In cryptography, a salt is random data that is used as an additional input to a one-way function that [=hashes=] data, a password or passphrase.
         </dd>
+
         <dt><dfn data-abbr="HTTP">Hypertext Transfer Protocol</dfn></dt>
         <dd>
           An application layer protocol for distributed, collaborative, hypermedia information systems designed within the framework of the Internet protocol suite.
           HTTP resources are identified and located on the network by URL's.
           An extension of HTTP is <strong><em><dfn data-abbr="HTTPS">Hypertext Transfer Protocol Secure</dfn></em></strong>, which uses TLS to encrypt the communication protocol.
+        </dd>
+
+        <dt><dfn data-abbr="TTL">Time to live</dfn></dt>
+        <dd>
+          A mechanism which limits the lifespan or lifetime of data in a computer or network.
+          TTL may be implemented as a counter or timestamp attached to or embedded in the data.
+        </dd>
+
+        <dt><dfn data-abbr="UUID">Universally Unique Identifier</dfn></dt>
+        <dd>
+          A 128-bit number used to uniquely identify some object or entity on the Internet.
+          When generated according to the standard methods, UUIDs are, for practical purposes, unique.
+          Their uniqueness does not depend on a central registration authority or coordination between the parties generating them.
+        </dd>
+
+        <dt><dfn data-abbr="NAT">Network address translation</dfn></dt>
+        <dd>
+          A method of mapping an IP address space into another by modifying network address information in the IP header of packets while they are in transit across a traffic routing device.
+        </dd>
+
+        <dt><dfn>firewall</dfn></dt>
+        <dd>
+          A network security system that monitors and controls incoming and outgoing network traffic based on predetermined security rules.
         </dd>
 
       </dl>
@@ -342,8 +371,9 @@
         </p>
 
         <p>
-          A DID is resolved by a [=DID resolver=] into a [=DID document=].
-          This contains additional information about a DID, such as further public keys, authentication and authorization methods, or so-called service endpoints.
+          A DID is resolved by a [=DID resolver=] into a [=DID document=] stored on a [=verifiable data registry=].
+          This can be a [=blockchain=], a [=content-addressable storage=] (CAS) or any other (web) server.
+          The [=DID document=] contains additional information about a DID, such as further public keys, authentication and authorization methods, or so-called service endpoints.
           The latter are details of services or storage locations that can be linked to the [=identifier=].
           A [=DID document=] never contains personal information.
         </p>
@@ -379,7 +409,7 @@
           The [=claims=] are simple statements associated with an [=identifier=] and some metadata.
           Basically, anyone can act as an [=issuer=], e.g., a trusted [=entity=] or even oneself.
           The latter type of VCs are called self-issued credentials and are useful, for example, for delegating one's own credential to another [=identifier=].
-          What should be considered a trusted [=entity=] for certain statements is not part of the proposal.
+          What should be considered a trusted [=entity=] for certain statements is not part of this proposal.
         </p>
 
         <p>
@@ -387,7 +417,7 @@
           This feature gives the credential [=holder=] the oppurtunity to choose, which attributes should be shown to the [=verifier=].
           To achive this, every attribute value a [=verifiable credential=] contains, is hashed with a [=salt=].
           The final [=verifiable credential=] will only contain this [=hashes=] - the [=salts=] and the values are stored in a separate json data object, called the [=plaintext credential=].
-          The following example will show such a [=plaintext credential=] and its corresponding VC.
+          The following examples will show such a [=plaintext credential=] and its corresponding VC.
         </p>
 
         <aside class="example">
@@ -442,7 +472,7 @@
         <h2>Verifiable Credentials and Verifiable Presentations</h2>
 
         <p>
-          The VCs are issued to a [=subject=] ([=holder=]) and its [=identifier=], e.g. a DID.
+          The VCs are issued to a [=subject=] (owned by a [=holder=]) and its [=identifier=], e.g. a DID.
           This [=holder=] can generate a VP with one or more VCs, in which he can prove by a [=digital signature=] that he controls the [=identifier=](s) of one or more VCs.
           The aggregation of this information typically expresses some aspect of a person, organization or other [=entity=].
           He finally sends the VP to a [=verifier=] that can cryptographically validate the VCs trustworthiness.
@@ -576,7 +606,7 @@
         <p>
           In addition to an expiration date (`expirationDate` or `validUntil`) for credentials, [=issuers=] also have the option to revoke it.
           For this purpose, the [[[vc-data-model]]] defines the property `credentialStatus`, which links to a revocation list.
-          This list can be stored on a [=blockchain=], a [=content-addressable storage=] (CAS) or any other (web)server.
+          This list can be stored on a [=blockchain=], a [=content-addressable storage=] (CAS) or any other (web) server.
         </p>
 
         <aside class="example">
@@ -716,7 +746,7 @@
             <dd>
               The `challenge` property is required and MUST be a long random number.
               It is RECOMMENDED to use at least 128 bit. For example, an UUID [[rfc4122]] might be helpful for this task.
-              The challenge is computed by the [=verifier=] and MUST have a Time to Live (TTL).
+              The challenge is computed by the [=verifier=] and MUST have a [=Time to Live=] (TTL).
             </dd>
 
           <dt>domain</dt>
@@ -841,7 +871,7 @@
         <aside class="example">
           <p>Encoded [=credential response=]</p>
           <pre class="nohighlight">
-            https://verifier-app.another-example.com/responses?<span style="color: #008000; font-weight: bold">iwce=JWZXJpZmlhYmxlUHJ...JodH</span>
+            https://verifier-app.another-example.com/responses?<span style="color: #008000; font-weight: bold">iwce=eyZXJpZmlhYmxlUHJ...JodH</span>
           </pre>
         </aside>
 
@@ -906,7 +936,7 @@
       </p>
 
       <p>
-        Additionally, this proposal enables every service provider that has an own app including credential and their exchange functionality in its own app without relying on a central so called [=identity=] [=wallet=] to store the issued credential.
+        Additionally, this proposal enables every service provider that has an own app including credential and their exchange functionality in its own app without relying on a central [=identity=] [=wallet=] to store the issued credential.
         From the user perspective he or she only has to rely on the [=issuer=] and its application, not in an intermediary [=wallet=] service or app for storing the credentials.
       </p>
 
@@ -921,14 +951,14 @@
         <h2>Perfect Forward Secrecy</h2>
 
         <p>
-          Because HTTPS is used to transport [=credential requests=] and [=credential responses=] between two applications, [=perfect forward secrecy=] (PFS) is substantial in most of the available implementations.
+          Because HTTPS is used to transport [=credential requests=] and [=credential responses=] between two applications, [=perfect forward secrecy=] (PFS) is substantial in many of the available implementations.
           Note, that this applies only to the network connection while [=credential requests=] or [=credential responses=] are made.
           The including VP and its VCs signed by the [=holder=] and one or more [=issuers=] are unaffected.
           When using QR codes for a [=credential request=], this security requirement is obsolete.
         </p>
 
         <p>
-          Since [=Transport Layer Security=] (TLS) operates on the network layer, it ensures that the information transferred within a URL is also protected (e.g. the query).
+          Since [=Transport Layer Security=] (TLS) secures the communication channel before any user data is transmitted, it ensures that the information transferred within a URL is also protected (e.g. the query).
         </p>
 
       </section>
@@ -938,7 +968,7 @@
         <h2>Trust</h2>
 
         <p>
-          Because HTTPS is used to transport [=credential requests=] and [=credential responses=] between two applications, the underlying [=public key infrastructure=] (PKI) of TLS (X.509) builds trust for this connection, in that way, that the communication endpoints are the intended ones.
+          Because HTTPS is used to transport [=credential requests=] and [=credential responses=] between two applications, the underlying [=public key infrastructure=] (PKI) of TLS (X.509) [[rfc5280]] builds trust for this connection, in that way, that the communication endpoints are the intended ones.
           This is helpful to identify the applications that want to do a credential exchange.
         </p>
 
@@ -1003,11 +1033,11 @@
       </p>
 
       <p>
-        Furthermore, TLS and <abbr title="public key infrastructures">PKIs</abbr> according to X.509 play an important role as a complement to DIDs.
+        Furthermore, TLS and <abbr title="public key infrastructures">PKIs</abbr> according to X.509 [[rfc5280]] play an important role as a complement to DIDs.
         They support bootstrapping in terms of trustworthiness and for channel security between two [=wallets=].
         HTTPS in particular is widely used today.
         It ensures the authenticity of (mostly) domain names and provides encrypted transport of data.
-        The trust hierarchies in today's PKIs are largely established, and TLS is easy to use as transport security in today's network infrastructures (NAT, firewalls, etc.).
+        The trust hierarchies in today's PKIs are largely established, and TLS is easy to use as transport security in today's network infrastructures (NAT, [=firewalls=], etc.).
         With more widespread use of DIDs and VCs and the associated trust structures, they can also be used later for server-side authentication, but initially they will only replace the little-used TLS client certificates in a more flexible way.
       </p>
 
