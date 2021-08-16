@@ -176,18 +176,18 @@
 
         <dt><dfn data-abbr="DID">decentralized identifier</dfn></dt>
           <dd>
-            A portable URL-based [=identifier=], also known as a DID, associated with an [=entity=].
-            These [=identifiers=] are most often used in a [=verifiable credential=] and are associated with [=subjects=].
+            A globally unique URL-based [=identifier=], also known as a DID, associated with an [=entity=].
+            These [=identifiers=] are mostly used in a [=verifiable credential=] to identify its [=subject=].
           </dd>
 
         <dt><dfn>DID document</dfn></dt>
         <dd>
-          A document that is accessible using a [=verifiable data registry=] and contains information related to a specific [=decentralized identifier=], such as the associated public key information.
+          A document that is accessible from a [=verifiable data registry=] using a [=DID resolver=] and contains information related to a specific [=decentralized identifier=], such as the associated public key information.
         </dd>
 
         <dt><dfn>DID method</dfn></dt>
         <dd>
-          A definition of how a specific DID method scheme is implemented. A DID method is defined by a DID method specification, which specifies the precise operations by which DID's and [=DID documents=] are created, resolved, updated, and deactivated
+          A definition of how a specific DID method scheme is implemented. A DID method is defined by a DID method specification, which specifies the precise operations by which DIDs and [=DID documents=] are created, resolved, updated, and deactivated
         </dd>
 
         <dt><dfn>DID resolver</dfn></dt>
@@ -221,7 +221,7 @@
 
         <dt><dfn>plaintext credential</dfn></dt>
         <dd>
-          A data structure that stores plain values and [=salts=] that serve as input to a [=hash=] function and are used to implement the [=selective disclosure=] feature in a [=verifiable credential=].
+          A data structure that stores plain values and [=salts=] serving as input to a [=hash=] function. It is used to implement the [=selective disclosure=] feature in a [=verifiable credential=].
         </dd>
 
         <dt><dfn data-abbr="PKI">public key infrastructure</dfn></dt>
@@ -334,7 +334,7 @@
 
         <dt><dfn data-abbr="UUID">Universally Unique Identifier</dfn></dt>
         <dd>
-          A 128-bit number used to uniquely identify some object or entity on the Internet.
+          A 128-bit number described by [[rfc4122]] and used to uniquely identify some object or [=entity=] on the Internet.
           When generated according to the standard methods, UUIDs are, for practical purposes, unique.
           Their uniqueness does not depend on a central registration authority or coordination between the parties generating them.
         </dd>
